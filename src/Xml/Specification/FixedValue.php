@@ -1,0 +1,44 @@
+<?php
+
+
+namespace Olcs\XmlTools\Xml\Specification;
+
+
+/**
+ * Class FixedValue
+ * @package Olcs\XmlTools\Xml\Specification
+ */
+class FixedValue extends AbstractCapturingNode
+{
+    /**
+     * @var
+     */
+    protected $value;
+
+    /**
+     * @param $destination
+     * @param $value
+     */
+    public function __construct($destination, $value)
+    {
+        $this->destination = $destination;
+        $this->value = $value;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * @param \DOMElement $element
+     * @return mixed
+     */
+    public function apply(\DOMElement $element)
+    {
+        return $this->createReturnValue($this->getValue());
+    }
+}

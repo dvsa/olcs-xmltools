@@ -1,0 +1,10 @@
+<phpunit stopOnFailure="true" syntaxCheck="true" strict="true" colors="true">
+    <testsuite name="Olcs\XmlTools">
+        <directory suffix="Test.php">./test</directory>
+    </testsuite>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src/</directory>
+        </whitelist>
+    </filter>
+</phpunit>
