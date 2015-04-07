@@ -5,6 +5,7 @@ use Olcs\XmlTools\Validator\Xsd;
 use Olcs\XmlTools\Validator\XsdFactory;
 use Olcs\XmlTools\Filter\MapXmlFile;
 use Olcs\XmlTools\Filter\ParseXml;
+use Olcs\XmlTools\Filter\ParseXmlString;
 
 /**
  * Class Module
@@ -27,7 +28,8 @@ class Module
             'validators' => [
                 'invokables' => [
                     MapXmlFile::class => MapXmlFile::class,
-                    ParseXml::class => ParseXml::class
+                    ParseXml::class => ParseXml::class,
+                    ParseXmlString::class => ParseXmlString::class
                 ]
             ]
         ];
