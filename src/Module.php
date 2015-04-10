@@ -20,12 +20,12 @@ class Module
     public function getConfig()
     {
         return [
-            'filters' => [
+            'validators' => [
                 'factories' => [
                     Xsd::class => XsdFactory::class
                 ]
             ],
-            'validators' => [
+            'filters' => [
                 'invokables' => [
                     MapXmlFile::class => MapXmlFile::class,
                     ParseXml::class => ParseXml::class,
