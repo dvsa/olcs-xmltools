@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Olcs\XmlTools\Xml\Specification;
-
 
 /**
  * Class RecursionValue
@@ -13,9 +11,9 @@ class RecursionValue extends AbstractCapturingNode
     protected $recursion;
     /**
      * @param $destination
-     * @param Recursion $recursion
+     * @param SpecificationInterface $recursion
      */
-    public function __construct($destination, Recursion $recursion)
+    public function __construct($destination, SpecificationInterface $recursion)
     {
         $this->destination = $destination;
         $this->recursion = $recursion;

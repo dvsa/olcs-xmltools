@@ -15,7 +15,7 @@ class MultiRecursionValue extends AbstractCapturingNode
      * @param $destination
      * @param Recursion $recursion
      */
-    public function __construct($destination, Recursion $recursion)
+    public function __construct($destination, SpecificationInterface $recursion)
     {
         $this->destination = $destination;
         $this->recursion = $recursion;
