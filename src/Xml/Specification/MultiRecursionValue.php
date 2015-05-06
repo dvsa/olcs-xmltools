@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Olcs\XmlTools\Xml\Specification;
-
 
 /**
  * Class MultiRecursionValue
@@ -13,7 +11,7 @@ class MultiRecursionValue extends AbstractCapturingNode
     protected $recursion;
     /**
      * @param $destination
-     * @param Recursion $recursion
+     * @param SpecificationInterface $recursion
      */
     public function __construct($destination, SpecificationInterface $recursion)
     {
@@ -22,7 +20,7 @@ class MultiRecursionValue extends AbstractCapturingNode
     }
 
     /**
-     * @return Recursion
+     * @return SpecificationInterface
      */
     public function getRecursion()
     {
