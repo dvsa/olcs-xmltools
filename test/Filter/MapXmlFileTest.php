@@ -1,6 +1,5 @@
 <?php
 
-
 namespace OlcsTest\XmlTools\Filter;
 
 use Mockery\Adapter\Phpunit\MockeryTestCase as TestCase;
