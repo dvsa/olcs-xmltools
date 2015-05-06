@@ -85,6 +85,7 @@ class XmlNodeBuilder extends \DomDocument
         $this->setRootElement($rootElement);
         $this->setXmlNs($xmlNs);
         $this->setData($data);
+        $this->formatOutput = true;
     }
 
     /**
@@ -106,7 +107,7 @@ class XmlNodeBuilder extends \DomDocument
      * @param \DomElement $domElement
      * @return \DomElement
      */
-    public function createFromArray(array $data, \DomElement $domElement = null)
+    private function createFromArray(array $data, \DomElement $domElement = null)
     {
         foreach ($data as $element => $values) {
             //create the element, and give it a value is it has one
