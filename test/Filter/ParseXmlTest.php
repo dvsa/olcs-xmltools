@@ -1,6 +1,5 @@
 <?php
 
-
 namespace OlcsTest\XmlTools\Filter;
 
 use Olcs\XmlTools\Filter\ParseXml;

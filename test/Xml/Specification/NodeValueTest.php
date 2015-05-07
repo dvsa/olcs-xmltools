@@ -1,6 +1,5 @@
 <?php
 
-
 namespace OlcsTest\XmlTools\Xml\Specification;
 
 use Olcs\XmlTools\Xml\Specification\NodeValue;
