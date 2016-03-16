@@ -1,6 +1,15 @@
 {
   "name": "olcs/olcs-xmltools",
   "description": "Xml tools for olcs",
+  "repositories": [
+    {
+      "packagist": false
+    },
+    {
+      "url": "http://satis.inf.mgt.mtpdvsa",
+      "type": "composer"
+    }
+  ],
   "require": {
     "php": ">=5.4.0",
     "zendframework/zendxml": "~1.0.2",
@@ -13,7 +22,9 @@
     "mikey179/vfsStream": "~1.4.0",
     "mockery/mockery": "~0.9.3"
   },
-
+  "config": {
+    "secure-http" : false
+  },
   "autoload" : {
     "psr-4" : {
       "Olcs\\XmlTools\\": "src//"
