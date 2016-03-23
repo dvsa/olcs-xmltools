@@ -6,6 +6,7 @@ use Olcs\XmlTools\Validator\XsdFactory;
 use Olcs\XmlTools\Filter\MapXmlFile;
 use Olcs\XmlTools\Filter\ParseXml;
 use Olcs\XmlTools\Filter\ParseXmlString;
+use Olcs\XmlTools\Xml\TemplateBuilder;
 
 /**
  * Class Module
@@ -20,6 +21,11 @@ class Module
     public function getConfig()
     {
         return [
+            'service_manager' => [
+                'invokables' => [
+                    TemplateBuilder::class => TemplateBuilder::class
+                ]
+            ],
             'validators' => [
                 'factories' => [
                     Xsd::class => XsdFactory::class
