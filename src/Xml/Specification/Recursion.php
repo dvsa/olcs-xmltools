@@ -39,10 +39,10 @@ class Recursion implements SpecificationInterface
     }
 
     /**
-     * @param \DomElement $parentElement
+     * @param \DOMElement $parentElement
      * @return array
      */
-    public function apply(\DomElement $parentElement)
+    public function apply(\DOMElement $parentElement)
     {
         $result = [];
         $specification = $this->getSpecification();

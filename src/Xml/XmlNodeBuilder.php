@@ -8,7 +8,7 @@ namespace Olcs\XmlTools\Xml;
  * Class XmlNodeBuilder
  * @package Olcs\XmlTools\Xml
  */
-class XmlNodeBuilder extends \DomDocument
+class XmlNodeBuilder extends \DOMDocument
 {
     /**
      * @var String
@@ -104,10 +104,10 @@ class XmlNodeBuilder extends \DomDocument
      * Creates the XML document, requires an array of data and a parent element
      *
      * @param array $data
-     * @param \DomElement $domElement
-     * @return \DomElement
+     * @param \DOMElement $domElement
+     * @return \DOMElement
      */
-    private function createFromArray(array $data, \DomElement $domElement = null)
+    private function createFromArray(array $data, \DOMElement $domElement = null)
     {
         foreach ($data as $element => $values) {
             //create the element, and give it a value is it has one

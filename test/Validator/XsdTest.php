@@ -5,7 +5,7 @@ namespace OlcsTest\XmlTools\Validator;
 use Olcs\XmlTools\Validator\Xsd;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit_Framework_TestCase as TestCase;
-use DomDocument;
+use DOMDocument;
 
 /**
  * Class XsdTest
@@ -32,7 +32,7 @@ XSD;
 
         file_put_contents($xsdFile, $this->xsd);
 
-        $dom = new DomDocument();
+        $dom = new DOMDocument();
         $dom->loadXml($xml);
 
         $sut = new Xsd();
@@ -57,7 +57,7 @@ XSD;
 
     public function testIsValidWithoutMapping()
     {
-        $xml = new DomDocument();
+        $xml = new DOMDocument();
         $xml->loadXML('<test></test>');
         $valid = true;
 
@@ -76,7 +76,7 @@ XSD;
 
     public function testIsValidWithInvalidXsd()
     {
-        $xml = new DomDocument();
+        $xml = new DOMDocument();
         $xml->loadXML('<test></test>');
         $valid = true;
 
