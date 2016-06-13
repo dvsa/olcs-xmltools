@@ -1,14 +1,21 @@
-<phpunit stopOnFailure="true" syntaxCheck="true" strict="true" colors="true">
-    <testsuite name="Olcs\XmlTools">
-        <directory suffix="Test.php">./</directory>
-    </testsuite>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="Bootstrap.php" colors="true" stopOnFailure="false" syntaxCheck="true">
+    <php>
+        <ini name="date.timezone" value="UTC" />
+    </php>
+    <testsuites>
+        <testsuite name="OLCS XmlTools">
+            <directory>./</directory>
+        </testsuite>
+    </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">../src/</directory>
         </whitelist>
     </filter>
     <logging>
-        <log type="coverage-html" target="./test/coverage-report" charset="UTF-8"
+        <log type="coverage-html" target="./coverage-report" charset="UTF-8"
              yui="true" highlight="true" lowUpperBound="50"
              highLowerBound="80"/>
     </logging>

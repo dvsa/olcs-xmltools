@@ -36,13 +36,13 @@ class XmlNodeBuilderTest extends TestCase
             ]
         ];
 
-        $expectedReturn = '<?xml version="1.0" encoding="UTF-8"?>
-                            <' . $parentElement . ' xmlns="' . $ns . '">
-                              <Body attributeOne="FirstAttribute" attributeTwo="SecondAttribute">
-                                <FirstNode>valueOne</FirstNode>
-                                  <SecondNode>valueTwo</SecondNode>
-                              </Body>
-                            </' . $parentElement . '>';
+        $expectedReturn = '<?xml version="1.0" encoding="UTF-8"?>'."\n".
+            '<' . $parentElement . ' xmlns="' . $ns . '">'."\n".
+            '  <Body attributeOne="FirstAttribute" attributeTwo="SecondAttribute">'."\n".
+            '    <FirstNode>valueOne</FirstNode>'."\n".
+            '    <SecondNode>valueTwo</SecondNode>'."\n".
+            '  </Body>'."\n".
+            '</' . $parentElement . '>';
 
         $sut = new XmlNodeBuilder($parentElement, $ns, $input);
         $this->assertXmlStringEqualsXmlString($expectedReturn, $sut->buildTemplate());
