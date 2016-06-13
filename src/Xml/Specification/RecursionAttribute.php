@@ -39,10 +39,10 @@ class RecursionAttribute implements SpecificationInterface
     }
 
     /**
-     * @param \DomElement $parentElement
+     * @param \DOMElement $parentElement
      * @return array
      */
-    public function apply(\DomElement $parentElement)
+    public function apply(\DOMElement $parentElement)
     {
         $result = [];
         $count = 0;

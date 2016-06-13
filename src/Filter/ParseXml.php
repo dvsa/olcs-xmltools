@@ -4,7 +4,7 @@ namespace Olcs\XmlTools\Filter;
 
 use Zend\Filter\AbstractFilter;
 use Zend\Filter\Exception;
-use DomDocument;
+use DOMDocument;
 use ZendXml\Security;
 
 /**
@@ -22,7 +22,7 @@ class ParseXml extends AbstractFilter
      */
     public function filter($value)
     {
-        $dom = new DomDocument();
+        $dom = new DOMDocument();
         Security::scan(file_get_contents($value), $dom);
 
         return $dom;

@@ -19,6 +19,6 @@ class ParseXmlStringTest extends TestCase
 
         $dom = $sut->filter($xml);
 
-        $this->assertInstanceOf('DomDocument', $dom);
+        $this->assertInstanceOf('DOMDocument', $dom);
     }
 }

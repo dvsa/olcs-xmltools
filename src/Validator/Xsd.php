@@ -4,7 +4,7 @@ namespace Olcs\XmlTools\Validator;
 
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Exception;
-use DomDocument;
+use DOMDocument;
 
 /**
  * Class Xsd
