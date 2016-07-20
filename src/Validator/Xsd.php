@@ -4,7 +4,6 @@ namespace Olcs\XmlTools\Validator;
 
 use Zend\Validator\AbstractValidator;
 use Zend\Validator\Exception;
-use DOMDocument;
 
 /**
  * Class Xsd
@@ -95,11 +94,8 @@ class Xsd extends AbstractValidator
             $errors = libxml_get_errors();
             foreach ($errors as $error) {
                 $this->abstractOptions['messages'][] = sprintf(
-                    'XML error "%s" [%d] (Code %d) in %s on line %d column %d' . "\n",
+                    'XML error "%s" on line %d column %d' . "\n",
                     $error->message,
-                    $error->level,
-                    $error->code,
-                    $error->file,
                     $error->line,
                     $error->column
                 );
