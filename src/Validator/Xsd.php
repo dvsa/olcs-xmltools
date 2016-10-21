@@ -28,15 +28,27 @@ class Xsd extends AbstractValidator
     protected $xsd;
 
     /**
+     * The maximum number of schema errors to return, defaults to 3 (prevents massive error messages)
+     *
+     * @var int
+     */
+    protected $maxErrors = 3;
+
+    /**
+     * Array of message templates
+     *
      * @var array
      */
     protected $messageTemplates = [
-        self::INVALID_XML => 'There was a problem validating your xml file:'
+        self::INVALID_XML => 'Your xml file didn\'t validate against the schema (first %value% errors shown)'
     ];
 
     /**
-     * @param mixed $xsd
-     * @return $this
+     * Sets the xsd
+     *
+     * @param mixed $xsd the xsd
+     *
+     * @return void
      */
     public function setXsd($xsd)
     {
@@ -44,6 +56,8 @@ class Xsd extends AbstractValidator
     }
 
     /**
+     * Gets the xsd
+     *
      * @return mixed
      */
     public function getXsd()
@@ -52,7 +66,10 @@ class Xsd extends AbstractValidator
     }
 
     /**
-     * @param array $mappings
+     * Sets xsd mappings
+     *
+     * @param array $mappings xsd mappings
+     *
      * @return $this
      */
     public function setMappings($mappings)
@@ -61,6 +78,8 @@ class Xsd extends AbstractValidator
     }
 
     /**
+     * Gets xsd mappings
+     *
      * @return array
      */
     public function getMappings()
@@ -75,7 +94,8 @@ class Xsd extends AbstractValidator
      * getMessages() will return an array of messages that explain why the
      * validation failed.
      *
-     * @param  string $value Filepath to xml document
+     * @param string $value Filepath to xml document
+     *
      * @return bool
      * @throws Exception\RuntimeException If validation of $value is impossible
      */
@@ -90,16 +110,29 @@ class Xsd extends AbstractValidator
         $valid = $value->schemaValidate($this->getXsd());
 
         if (!$valid) {
-            $this->error(self::INVALID_XML);
-            $errors = libxml_get_errors();
-            foreach ($errors as $error) {
+            $errors = $this->getXmlErrors();
+
+            $totalErrors = count($errors);
+            $numShownErrors = ($totalErrors > $this->maxErrors ? $this->maxErrors : $totalErrors);
+
+            $this->error(self::INVALID_XML, $numShownErrors);
+
+            $errorCounter = 0;
+
+            //we're counting from zero, so we stop at one below the total number we need
+            while ($errorCounter < $numShownErrors) {
+                $error = $errors[$errorCounter];
+
                 $this->abstractOptions['messages'][] = sprintf(
-                    'XML error "%s" on line %d column %d' . "\n",
+                    'XML error "%s" on line %d column %d',
                     $error->message,
                     $error->line,
                     $error->column
                 );
+
+                $errorCounter++;
             }
+
             libxml_clear_errors();
         }
 
@@ -108,6 +141,12 @@ class Xsd extends AbstractValidator
         return $valid;
     }
 
+    /**
+     * setup entity loader
+     *
+     * @return void
+     * @throws \RuntimeException
+     */
     protected function setupEntityLoader()
     {
         $mapping = $this->getMappings();
@@ -132,5 +171,37 @@ class Xsd extends AbstractValidator
                 throw new \RuntimeException($message);
             }
         );
+    }
+
+    /**
+     * Returns an array of xml schema errors (this function is to aid unit testing)
+     *
+     * @return array
+     */
+    public function getXmlErrors()
+    {
+        return libxml_get_errors();
+    }
+
+    /**
+     * Sets the maximum number of errors to return
+     *
+     * @param int $maxErrors number of errors to return
+     *
+     * @return void
+     */
+    public function setMaxErrors($maxErrors)
+    {
+        $this->maxErrors = $maxErrors;
+    }
+
+    /**
+     * Gets the maximum number of errors to return
+     *
+     * @return int
+     */
+    public function getMaxErrors()
+    {
+        return $this->maxErrors;
     }
 }
