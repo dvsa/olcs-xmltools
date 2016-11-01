@@ -49,8 +49,8 @@ class Xsd extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = [
-        self::INVALID_XML => 'Your xml file didn\'t validate against the schema (first %value% errors shown)',
-        self::INVALID_XML_NO_ERROR => 'Your xml file didn\'t validate against the schema (no specific errors available)'
+        self::INVALID_XML => 'The xml file didn\'t validate against the schema (first %value% errors shown)',
+        self::INVALID_XML_NO_ERROR => 'The xml file didn\'t validate against the schema (no specific errors available)',
     ];
 
     /**
@@ -148,18 +148,16 @@ class Xsd extends AbstractValidator
             if ($totalErrors === 0) {
                 $this->error(self::INVALID_XML_NO_ERROR);
             } else {
-                $numShownErrors = ($totalErrors > $this->maxErrors ? $this->maxErrors : $totalErrors);
+                $numShownErrors = min($totalErrors, $this->maxErrors);
 
                 $this->error(self::INVALID_XML, $numShownErrors);
-
-                $errorCounter = 0;
 
                 //reindex as some may have been removed
                 $returnedErrors = array_values($errors);
 
                 //we're counting from zero, so we stop at one below the total number we need
-                while ($errorCounter < $numShownErrors) {
-                    $error = $returnedErrors[$errorCounter];
+                for ($i=0; $i<$numShownErrors; $i++) {
+                    $error = $returnedErrors[$i];
 
                     $this->abstractOptions['messages'][] = sprintf(
                         'XML error "%s" on line %d column %d',
@@ -167,8 +165,6 @@ class Xsd extends AbstractValidator
                         $error->line,
                         $error->column
                     );
-
-                    $errorCounter++;
                 }
             }
 
