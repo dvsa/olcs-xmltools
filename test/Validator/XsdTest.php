@@ -23,6 +23,8 @@ XSD;
 
     /**
      * Tests what happens when the document doesn't validate against the schema
+     * We ask for a maximum of 2 errors, and have excluded errors 2 and 3 through setXmlMessageExclude
+     * Therefore errors 1 and 4 are what we return
      */
     public function testIsValidFalse()
     {
@@ -46,10 +48,22 @@ XSD;
         $error3->line = 555;
         $error3->column = 666;
 
+        $error4 = new \LibXMLError();
+        $error4->message = '*error message 4*';
+        $error4->line = 777;
+        $error4->column = 888;
+
+        $error5 = new \LibXMLError();
+        $error5->message = '*error message 5*';
+        $error5->line = 999;
+        $error5->column = 101010;
+
         $libXmlErrors = [
             0 => $error,
             1 => $error2,
-            2 => $error3
+            2 => $error3,
+            3 => $error4,
+            4 => $error5
         ];
 
         vfsStream::setup('root');
@@ -60,6 +74,7 @@ XSD;
         $dom = new DOMDocument();
         $dom->loadXml($xml);
 
+        /** @var Xsd $sut */
         $sut = m::mock(Xsd::class)->makePartial();
         $sut->setMappings(
             [
@@ -70,17 +85,74 @@ XSD;
 
         $sut->setMaxErrors($maxErrors);
         $sut->setXsd('http://schemafile.com/xsdfile.xsd');
+
+        $sut->setXmlMessageExclude(['message 2', 'message 3']); //message 2 and 3 are excluded
+
         $sut->shouldReceive('getXmlErrors')->once()->andReturn($libXmlErrors);
         $this->assertEquals(false, $sut->isValid($dom));
 
         $messages = $sut->getMessages();
         $expectedMessage1 = 'XML error "*error message*" on line 111 column 222';
-        $expectedMessage2 = 'XML error "*error message 2*" on line 333 column 444';
+        $expectedMessage2 = 'XML error "*error message 4*" on line 777 column 888';
 
         $this->assertCount($totalErrors, $messages);
         $this->assertArrayHasKey('invalid-xml', $messages);
         $this->assertEquals($expectedMessage1, $messages[0]);
         $this->assertEquals($expectedMessage2, $messages[1]);
+    }
+
+    /**
+     * Tests what happens when the document doesn't validate against the schema,
+     * but all errors are excluded due to containing paths
+     */
+    public function testIsValidFalseNoExtraMessages()
+    {
+        libxml_clear_errors();
+        $xml = '<doc><test></test><test></test></doc>';
+
+        $error = new \LibXMLError();
+        $error->message = '*error message*';
+        $error->line = 333;
+        $error->column = 444;
+
+        $error2 = new \LibXMLError();
+        $error2->message = '*error message 2*';
+        $error2->line = 555;
+        $error2->column = 666;
+
+        $libXmlErrors = [
+            0 => $error,
+            1 => $error2
+        ];
+
+        vfsStream::setup('root');
+        $xsdFile = vfsStream::url('root/xsdfile.xsd');
+
+        file_put_contents($xsdFile, $this->xsd);
+
+        $dom = new DOMDocument();
+        $dom->loadXml($xml);
+
+        /** @var Xsd $sut */
+        $sut = m::mock(Xsd::class)->makePartial();
+        $sut->setMappings(
+            [
+                'http://schemafile.com/xsdfile.xsd' => $xsdFile,
+                'http://www.w3.org/2001/XMLSchema' => __DIR__ . '/../../../../data/xsd/xml.xsd'
+            ]
+        );
+
+        $sut->setXsd('http://schemafile.com/xsdfile.xsd');
+
+        $sut->setXmlMessageExclude(['error message']); //will exclude both messages
+
+        $sut->shouldReceive('getXmlErrors')->once()->andReturn($libXmlErrors);
+        $this->assertEquals(false, $sut->isValid($dom));
+
+        $messages = $sut->getMessages();
+
+        $this->assertCount(1, $messages);
+        $this->assertArrayHasKey('invalid-xml-no-error', $messages);
     }
 
     /**
