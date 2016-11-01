@@ -12,6 +12,7 @@ use Zend\Validator\Exception;
 class Xsd extends AbstractValidator
 {
     const INVALID_XML = 'invalid-xml';
+    const INVALID_XML_NO_ERROR = 'invalid-xml-no-error';
 
     /**
      * An array containing mappings of url xsd's to local file paths
@@ -19,6 +20,14 @@ class Xsd extends AbstractValidator
      * @var array
      */
     protected $mappings = [];
+
+    /**
+     * A series of strings that if they're found in the xml error, the message will be suppressed
+     * Prevents things like directory paths being shown to the user
+     *
+     * @var array
+     */
+    protected $xmlMessageExclude = [];
 
     /**
      * Filepath to Xsd schema
@@ -40,7 +49,8 @@ class Xsd extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = [
-        self::INVALID_XML => 'Your xml file didn\'t validate against the schema (first %value% errors shown)'
+        self::INVALID_XML => 'The xml file didn\'t validate against the schema (first %value% errors shown)',
+        self::INVALID_XML_NO_ERROR => 'The xml file didn\'t validate against the schema (no specific errors available)',
     ];
 
     /**
@@ -88,6 +98,18 @@ class Xsd extends AbstractValidator
     }
 
     /**
+     * Sets the array of strings, if we find one in the message then it isn't returned
+     *
+     * @param array $xmlMessageExclude messages to exclude
+     *
+     * @return void
+     */
+    public function setXmlMessageExclude(array $xmlMessageExclude)
+    {
+        $this->xmlMessageExclude = $xmlMessageExclude;
+    }
+
+    /**
      * Returns true if and only if $value meets the validation requirements
      *
      * If $value fails validation, then this method returns false, and
@@ -112,25 +134,38 @@ class Xsd extends AbstractValidator
         if (!$valid) {
             $errors = $this->getXmlErrors();
 
+            foreach ($errors as $key => $error) {
+                foreach ($this->xmlMessageExclude as $exclusion) {
+                    if (strpos($error->message, $exclusion) !== false) {
+                        unset($errors[$key]);
+                        break;
+                    }
+                }
+            }
+
             $totalErrors = count($errors);
-            $numShownErrors = ($totalErrors > $this->maxErrors ? $this->maxErrors : $totalErrors);
 
-            $this->error(self::INVALID_XML, $numShownErrors);
+            if ($totalErrors === 0) {
+                $this->error(self::INVALID_XML_NO_ERROR);
+            } else {
+                $numShownErrors = min($totalErrors, $this->maxErrors);
 
-            $errorCounter = 0;
+                $this->error(self::INVALID_XML, $numShownErrors);
 
-            //we're counting from zero, so we stop at one below the total number we need
-            while ($errorCounter < $numShownErrors) {
-                $error = $errors[$errorCounter];
+                //reindex as some may have been removed
+                $returnedErrors = array_values($errors);
 
-                $this->abstractOptions['messages'][] = sprintf(
-                    'XML error "%s" on line %d column %d',
-                    $error->message,
-                    $error->line,
-                    $error->column
-                );
+                //we're counting from zero, so we stop at one below the total number we need
+                for ($i=0; $i<$numShownErrors; $i++) {
+                    $error = $returnedErrors[$i];
 
-                $errorCounter++;
+                    $this->abstractOptions['messages'][] = sprintf(
+                        'XML error "%s" on line %d column %d',
+                        $error->message,
+                        $error->line,
+                        $error->column
+                    );
+                }
             }
 
             libxml_clear_errors();
