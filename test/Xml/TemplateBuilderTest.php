@@ -22,10 +22,10 @@ class TemplateBuilderTest extends TestCase
 
         $sut = new TemplateBuilder();
 
-        $result = $sut->buildTemplate($uri, ['substitute_me' => 'Node Value']);
+        $result = $sut->buildTemplate($uri, ['substitute_me' => 'Node Value<&>']);
 
         $this->assertEquals(
-            "<?xml version=\"1.0\"?>\n<document><substitute_me>Node Value</substitute_me></document>\n",
+            "<?xml version=\"1.0\"?>\n<document><substitute_me>Node Value&lt;&amp;&gt;</substitute_me></document>\n",
             $result
         );
         // assert that the builder hasn't changed the original template file.
