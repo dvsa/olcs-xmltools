@@ -116,7 +116,7 @@ class Xsd extends AbstractValidator
      * getMessages() will return an array of messages that explain why the
      * validation failed.
      *
-     * @param string $value Filepath to xml document
+     * @param \DOMDocument $value Filepath to xml document
      *
      * @return bool
      * @throws Exception\RuntimeException If validation of $value is impossible
@@ -129,7 +129,7 @@ class Xsd extends AbstractValidator
 
         $this->setupEntityLoader();
 
-        $valid = $value->schemaValidate($this->getXsd());
+        $valid = @$value->schemaValidate($this->getXsd());
 
         if (!$valid) {
             $errors = $this->getXmlErrors();
