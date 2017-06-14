@@ -116,7 +116,7 @@ class Xsd extends AbstractValidator
      * getMessages() will return an array of messages that explain why the
      * validation failed.
      *
-     * @param \DOMDocument $value Filepath to xml document
+     * @param \DOMDocument $value XML Document to validate
      *
      * @return bool
      * @throws Exception\RuntimeException If validation of $value is impossible
