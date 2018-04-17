@@ -17,9 +17,9 @@
   "require": {
     "php": ">=5.4.0",
     "zendframework/zendxml": "^1.0.2",
-    "zendframework/zend-filter": "~2.4.0",
-    "zendframework/zend-servicemanager": "~2.4.0",
-    "zendframework/zend-validator": "~2.4.0"
+    "zendframework/zend-filter": "~2.8.0",
+    "zendframework/zend-servicemanager": "~3.3.0",
+    "zendframework/zend-validator": "~2.10.0"
   },
   "require-dev": {
     "olcs/olcs-devtools": "dev-master",
