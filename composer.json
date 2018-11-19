@@ -3,9 +3,6 @@
   "description": "Xml tools for olcs",
   "repositories": [
     {
-      "packagist": false
-    },
-    {
       "url": "http://devrepo.shd.ci.nonprod.dvsa.aws",
       "type": "composer"
     },
@@ -24,7 +21,8 @@
   "require-dev": {
     "olcs/olcs-devtools": "dev-master",
     "mikey179/vfsStream": "~1.4.0",
-    "mockery/mockery": "~0.9.3"
+    "mockery/mockery": "~0.9.3",
+    "xificurk/phpstan-shim": "^0.10.4"
   },
   "config": {
     "secure-http" : false
