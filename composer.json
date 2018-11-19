@@ -3,6 +3,9 @@
   "description": "Xml tools for olcs",
   "repositories": [
     {
+      "packagist": false
+    },
+    {
       "url": "http://devrepo.shd.ci.nonprod.dvsa.aws",
       "type": "composer"
     },
