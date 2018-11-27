@@ -24,9 +24,9 @@
   "require-dev": {
     "olcs/olcs-devtools": "dev-master",
     "mikey179/vfsStream": "~1.4.0",
-    "mockery/mockery": "~0.9.3",
     "phpstan/phpstan-shim": "^0.10.5",
-    "phpstan/phpstan-mockery": "^0.10.2"
+    "phpstan/phpstan-mockery": "^0.10.2",
+    "mockery/mockery": "^1.2.0"
   },
   "config": {
     "secure-http" : false
