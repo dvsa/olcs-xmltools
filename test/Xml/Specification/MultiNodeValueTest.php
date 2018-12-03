@@ -4,13 +4,12 @@
 namespace OlcsTest\XmlTools\Xml\Specification;
 
 use Olcs\XmlTools\Xml\Specification\MultiNodeValue;
-use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * Class MultiNodeValueTest
  * @package OlcsTest\XmlTools\Xml\Specification
  */
-class MultiNodeValueTest extends TestCase
+class MultiNodeValueTest extends \PHPUnit\Framework\TestCase
 {
     public function testApply()
     {
