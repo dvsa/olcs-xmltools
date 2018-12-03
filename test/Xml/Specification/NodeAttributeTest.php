@@ -3,13 +3,12 @@
 namespace OlcsTest\XmlTools\Xml\Specification;
 
 use Olcs\XmlTools\Xml\Specification\NodeAttribute;
-use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * Class NodeAttributeTest
  * @package OlcsTest\XmlTools\Xml\Specification
  */
-class NodeAttributeTest extends TestCase
+class NodeAttributeTest extends \PHPUnit\Framework\TestCase
 {
     public function testApply()
     {
