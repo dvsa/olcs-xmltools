@@ -4,7 +4,6 @@ namespace OlcsTest\XmlTools\Xml\Specification;
 
 use Olcs\XmlTools\Xml\Specification\NodeAttribute;
 use Olcs\XmlTools\Xml\Specification\RecursionAttribute;
-use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * Class RecursionAttributeTest
@@ -13,7 +12,7 @@ use PHPUnit_Framework_TestCase as TestCase;
  *
  * @package OlcsTest\XmlTools\Xml\Specification
  */
-class RecursionAttributeTest extends TestCase
+class RecursionAttributeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests the apply function
