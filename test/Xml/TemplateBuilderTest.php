@@ -4,13 +4,14 @@
 namespace OlcsTest\XmlTools\Xml;
 
 use Olcs\XmlTools\Xml\TemplateBuilder;
+use PHPUnit_Framework_TestCase as TestCase;
 use org\bovigo\vfs\vfsStream;
 
 /**
  * Class TemplateBuilderTest
  * @package XmlTools\src\Xml
  */
-class TemplateBuilderTest extends \PHPUnit\Framework\TestCase
+class TemplateBuilderTest extends TestCase
 {
     public function testBuildTemplate()
     {

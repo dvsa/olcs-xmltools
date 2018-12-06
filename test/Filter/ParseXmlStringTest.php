@@ -3,12 +3,13 @@
 namespace OlcsTest\XmlTools\Filter;
 
 use Olcs\XmlTools\Filter\ParseXmlString;
+use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * Class ParseXmlStringTest
  * @package OlcsTest\XmlTools\src\Filter
  */
-class ParseXmlStringTest extends \PHPUnit\Framework\TestCase
+class ParseXmlStringTest extends TestCase
 {
     public function testFilter()
     {
