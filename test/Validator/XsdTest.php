@@ -4,9 +4,9 @@ namespace OlcsTest\XmlTools\Validator;
 
 use Olcs\XmlTools\Validator\Xsd;
 use org\bovigo\vfs\vfsStream;
+use PHPUnit_Framework_TestCase as TestCase;
 use DOMDocument;
 use Mockery as m;
-use Mockery\Adapter\Phpunit\MockeryTestCase as TestCase;
 
 /**
  * Class XsdTest

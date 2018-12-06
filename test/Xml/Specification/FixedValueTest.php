@@ -4,12 +4,13 @@
 namespace OlcsTest\XmlTools\Xml\Specification;
 
 use Olcs\XmlTools\Xml\Specification\FixedValue;
+use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * Class FixedValueTest
  * @package OlcsTest\XmlTools\Xml\Specification
  */
-class FixedValueTest extends \PHPUnit\Framework\TestCase
+class FixedValueTest extends TestCase
 {
     public function testApply()
     {
