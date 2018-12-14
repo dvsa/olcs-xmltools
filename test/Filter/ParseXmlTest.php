@@ -3,14 +3,13 @@
 namespace OlcsTest\XmlTools\Filter;
 
 use Olcs\XmlTools\Filter\ParseXml;
-use PHPUnit_Framework_TestCase as TestCase;
 use org\bovigo\vfs\vfsStream;
 
 /**
  * Class ParseXmlTest
  * @package OlcsTest\XmlTools\src\Filter
  */
-class ParseXmlTest extends TestCase
+class ParseXmlTest extends \PHPUnit\Framework\TestCase
 {
     public function testFilter()
     {

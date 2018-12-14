@@ -3,13 +3,12 @@
 namespace OlcsTest\XmlTools\Xml;
 
 use Olcs\XmlTools\Xml\XmlNodeBuilder;
-use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * Class XmlNodeBuilderTest
  * @package XmlTools\src\Xml
  */
-class XmlNodeBuilderTest extends TestCase
+class XmlNodeBuilderTest extends \PHPUnit\Framework\TestCase
 {
     public function testBuildTemplate()
     {
