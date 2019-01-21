@@ -1,6 +1,5 @@
 .idea
 vendor
-composer.lock
 composer.phar
 test/coverage-report
 test/coverage
