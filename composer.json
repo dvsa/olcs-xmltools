@@ -1,48 +1,58 @@
 {
-  "name": "olcs/olcs-xmltools",
-  "description": "Xml tools for olcs",
-  "repositories": [
-    {
-      "packagist": false
+    "name": "olcs/olcs-xmltools",
+    "description": "Xml tools for olcs",
+    "repositories": [
+        {
+            "packagist": false
+        },
+        {
+            "url": "http://nexus.shd.ci.nonprod.dvsa.aws/repository/OLCS",
+            "type": "composer"
+        },
+        {
+            "url": "http://nexus.shd.ci.nonprod.dvsa.aws/repository/Packagist-Proxy",
+            "type": "composer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "zendframework/zendxml": "^1.0.2",
+        "zendframework/zend-filter": "~2.4.0",
+        "zendframework/zend-servicemanager": "~2.4.0",
+        "zendframework/zend-validator": "~2.4.0",
+        "elendev/nexus-composer-push": "^0.0.4"
     },
-    {
-      "url": "http://devrepo.shd.ci.nonprod.dvsa.aws",
-      "type": "composer"
+    "require-dev": {
+        "olcs/olcs-devtools": "^4.203",
+        "mikey179/vfsstream": "~1.4.0",
+        "phpstan/phpstan-shim": "^0.10.5",
+        "phpstan/phpstan-mockery": "^0.10.2",
+        "mockery/mockery": "^1.2.0",
+        "johnkary/phpunit-speedtrap": "^3.0"
     },
-    {
-      "type": "vcs",
-      "url": "git@repo.shd.ci.nonprod.dvsa.aws:olcs/olcs-devtools.git"
+    "config": {
+        "secure-http": false
+    },
+    "autoload": {
+        "psr-4": {
+            "Olcs\\XmlTools\\": "src//"
+        }
+    },
+    "scripts": {
+        "ut": "vendor/bin/phpunit -c test/phpunit.xml --stop-on-failure",
+        "review": "vendor/bin/review",
+        "cs": "vendor/bin/phpcs --severity=1 --standard=vendor/olcs/coding-standards/Profiles/DVSA/CS/ruleset.xml",
+        "coverage": "vendor/bin/phpunit -c test/phpunit.xml --coverage-html ./test/coverage/html",
+        "sonar": "vendor/bin/phpunit -c test/phpunit.xml --coverage-clover ./test/coverage/coverage-report.clover --log-junit ./test/coverage/log.junit",
+        "update-syms": "vendor/bin/composer-update-syms",
+        "release": "release"
+    },
+    "extra": {
+        "nexus-push": {
+            "url": "http://nexus.shd.ci.nonprod.dvsa.aws/repository/olcs-xmltools",
+            "ignore-dirs": [
+                "test"
+            ]
+        }
     }
-  ],
-  "require": {
-    "php": ">=5.4.0",
-    "zendframework/zendxml": "^1.0.2",
-    "zendframework/zend-filter": "~2.4.0",
-    "zendframework/zend-servicemanager": "~2.4.0",
-    "zendframework/zend-validator": "~2.4.0"
-  },
-  "require-dev": {
-    "olcs/olcs-devtools": "dev-master",
-    "mikey179/vfsStream": "~1.4.0",
-    "phpstan/phpstan-shim": "^0.10.5",
-    "phpstan/phpstan-mockery": "^0.10.2",
-    "mockery/mockery": "^1.2.0",
-    "johnkary/phpunit-speedtrap": "^3.0"
-  },
-  "config": {
-    "secure-http" : false
-  },
-  "autoload" : {
-    "psr-4" : {
-      "Olcs\\XmlTools\\": "src//"
-    }
-  },
-  "scripts": {
-    "ut": "vendor/bin/phpunit -c test/phpunit.xml --stop-on-failure",
-    "review": "vendor/bin/review",
-    "cs": "vendor/bin/phpcs --severity=1 --standard=vendor/olcs/coding-standards/Profiles/DVSA/CS/ruleset.xml",
-    "coverage": "vendor/bin/phpunit -c test/phpunit.xml --coverage-html ./test/coverage/html",
-    "sonar": "vendor/bin/phpunit -c test/phpunit.xml --coverage-clover ./test/coverage/coverage-report.clover --log-junit ./test/coverage/log.junit",
-    "update-syms": "vendor/bin/composer-update-syms"
-  }
 }
