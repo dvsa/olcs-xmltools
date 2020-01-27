@@ -15,11 +15,12 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "zendframework/zendxml": "^1.0.2",
-        "zendframework/zend-filter": "~2.4.0",
-        "zendframework/zend-servicemanager": "~2.4.0",
-        "zendframework/zend-validator": "~2.4.0",
+        "php": "^5.5 || ^7.0",
+        "zendframework/zend-filter": "^2.5",
+        "zendframework/zend-servicemanager": "^2.5",
+        "zendframework/zend-stdlib": "^2.5",
+        "zendframework/zend-validator": "^2.5",
+        "zendframework/zendxml": "^1.2.0",
         "elendev/nexus-composer-push": "^0.1"
     },
     "require-dev": {
