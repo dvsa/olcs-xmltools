@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": "^5.5 || ^7.0",
+        "php": ">=7.2",
         "zendframework/zend-filter": "^2.5",
         "zendframework/zend-servicemanager": "^2.5",
         "zendframework/zend-stdlib": "^2.5",
@@ -24,12 +24,7 @@
         "elendev/nexus-composer-push": "^0.1"
     },
     "require-dev": {
-        "olcs/olcs-devtools": "~4.206.0",
-        "mikey179/vfsstream": "~1.4.0",
-        "phpstan/phpstan-shim": "^0.10.5",
-        "phpstan/phpstan-mockery": "^0.10.2",
-        "mockery/mockery": "^1.2.0",
-        "johnkary/phpunit-speedtrap": "^3.0"
+        "olcs/olcs-devtools": "~4.206.0"
     },
     "config": {
         "secure-http": false
