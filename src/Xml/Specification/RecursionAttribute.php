@@ -5,7 +5,7 @@ namespace Olcs\XmlTools\Xml\Specification;
 use Olcs\XmlTools\Xml\ElementIterator;
 use Olcs\XmlTools\Xml\NodeListIterator;
 use Olcs\XmlTools\Xml\TagNameFilterIterator;
-use Zend\Stdlib\ArrayUtils;
+use Laminas\Stdlib\ArrayUtils;
 
 /**
  * Class RecursionAttribute

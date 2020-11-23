@@ -2,8 +2,8 @@
 
 namespace Olcs\XmlTools\Validator;
 
-use Zend\Validator\AbstractValidator;
-use Zend\Validator\Exception;
+use Laminas\Validator\AbstractValidator;
+use Laminas\Validator\Exception;
 
 /**
  * Class Xsd
@@ -199,7 +199,8 @@ class Xsd extends AbstractValidator
 
                 $message = sprintf(
                     "Failed to load external entity: Public: %s; System: %s; Context: %s",
-                    var_export($public, 1), var_export($system, 1),
+                    var_export($public, 1),
+                    var_export($system, 1),
                     strtr(var_export($context, 1), [" (\n  " => '(', "\n " => '', "\n" => ''])
                 );
 
