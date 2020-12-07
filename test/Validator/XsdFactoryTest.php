@@ -16,7 +16,7 @@ class XsdFactoryTest extends TestCase
     {
         $config = ['xsd_mappings' => ['test'=> 'test.path']];
 
-        $mockSl = m::mock('Zend\ServiceManager\ServiceLocatorInterface');
+        $mockSl = m::mock('Laminas\ServiceManager\ServiceLocatorInterface');
         $mockSl->shouldReceive('getServiceLocator->get')->with('Config')->andReturn($config);
 
         $sut = new XsdFactory();

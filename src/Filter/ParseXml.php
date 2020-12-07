@@ -2,10 +2,10 @@
 
 namespace Olcs\XmlTools\Filter;
 
-use Zend\Filter\AbstractFilter;
-use Zend\Filter\Exception;
+use Laminas\Filter\AbstractFilter;
+use Laminas\Filter\Exception;
 use DOMDocument;
-use ZendXml\Security;
+use Laminas\Xml\Security;
 
 /**
  * Class ParseXml
