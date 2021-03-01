@@ -18,7 +18,7 @@
         "php": ">=7.2",
         "laminas/laminas-filter": "^2.5",
         "laminas/laminas-servicemanager": "^2.5",
-        "laminas/laminas-stdlib": "^2.5",
+        "laminas/laminas-stdlib": "^3.2.1",
         "laminas/laminas-validator": "^2.5",
         "laminas/laminas-xml": "^1.2.0",
         "elendev/nexus-composer-push": "^0.1",
