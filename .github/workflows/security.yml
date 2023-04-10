@@ -7,15 +7,11 @@ on:
     branches: [ main ]
   schedule:
     - cron: '0 0 * * 1'
-
+ 
 jobs:
   security:
-    steps:
-    - id: set-matrix
-      run: echo "php_versions={\"include\":[\"7.4\", \"8.0\", \"8.1\"]}" >> $GITHUB_OUTPUT
- 
     uses: dvsa/.github/.github/workflows/php-security.yml@promote-php-actions
     with: 
-     php_versions: ${{ needs.security.outputs.matrix}}
+     php_versions: "[\"7.4\", \"8.0\", \"8.1\"]"
     secrets:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
