@@ -3,15 +3,7 @@
     "description": "Xml tools for olcs",
     "repositories": [
         {
-            "packagist": false
-        },
-        {
-            "url": "https://nexus.olcs.dev-dvsacloud.uk/repository/OLCS",
-            "type": "composer"
-        },
-        {
-            "url": "https://nexus.olcs.dev-dvsacloud.uk/repository/Packagist-Proxy",
-            "type": "composer"
+            "packagist": true
         }
     ],
     "require": {
