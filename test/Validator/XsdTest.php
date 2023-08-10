@@ -31,7 +31,9 @@ XSD;
         libxml_clear_errors();
         $xml = '<doc><test></test><test></test></doc>';
         $maxErrors = 2; //we should get 3 errors from libxml, so this makes sure we're only returning the first 2
-        $totalErrors = 3; //accounted for by the generic error that precedes the specific xml
+
+        // Edited for backwards compatibility - See expectedErrorCount below
+        // $totalErrors = 3; //accounted for by the generic error that precedes the specific xml
 
         $error = new \LibXMLError();
         $error->message = '*error message*';
@@ -95,8 +97,10 @@ XSD;
         $expectedMessage1 = 'XML error "*error message*" on line 111 column 222';
         $expectedMessage2 = 'XML error "*error message 4*" on line 777 column 888';
 
-        $this->assertCount($totalErrors, $messages);
-        $this->assertArrayHasKey('invalid-xml', $messages);
+        // laminas-validator 2.11.1 will include an extra message 'invalid-xml', 2.25.0 will not
+        $expectedErrorCount = array_key_exists('invalid-xml', $messages) ? 3 : 2;
+        $this->assertCount($expectedErrorCount, $messages);
+        // $this->assertArrayHasKey('invalid-xml', $messages);
         $this->assertEquals($expectedMessage1, $messages[0]);
         $this->assertEquals($expectedMessage2, $messages[1]);
     }
@@ -151,8 +155,10 @@ XSD;
 
         $messages = $sut->getMessages();
 
-        $this->assertCount(1, $messages);
-        $this->assertArrayHasKey('invalid-xml-no-error', $messages);
+        // laminas-validator 2.11.1 will include an extra message 'invalid-xml-no-error', 2.25.0 will not
+        $expectedErrorCount = array_key_exists('invalid-xml-no-error', $messages) ? 1 : 0;
+        $this->assertCount($expectedErrorCount, $messages);
+        // $this->assertArrayHasKey('invalid-xml-no-error', $messages);
     }
 
     /**
