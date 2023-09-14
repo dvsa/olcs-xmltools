@@ -2,28 +2,26 @@
 
 namespace OlcsTest\XmlTools\Validator;
 
+use Interop\Container\ContainerInterface;
+use Olcs\XmlTools\Validator\Xsd;
 use Olcs\XmlTools\Validator\XsdFactory;
 use Mockery as m;
 use Mockery\Adapter\Phpunit\MockeryTestCase as TestCase;
 
-/**
- * Class XsdFactoryTest
- * @package OlcsTest\XmlTools\src\Validator
- */
 class XsdFactoryTest extends TestCase
 {
-    public function testCreateService()
+    public function testInvoke(): void
     {
         $config = ['xsd_mappings' => ['test'=> 'test.path']];
 
-        $mockSl = m::mock('Laminas\ServiceManager\ServiceLocatorInterface');
-        $mockSl->shouldReceive('getServiceLocator->get')->with('Config')->andReturn($config);
+        $container = m::mock(ContainerInterface::class);
+        $container->shouldReceive('get')->with('Config')->andReturn($config);
 
         $sut = new XsdFactory();
 
-        $service = $sut->createService($mockSl);
+        $service = $sut->__invoke($container, Xsd::class);
 
-        $this->assertInstanceOf('Olcs\XmlTools\Validator\Xsd', $service);
+        $this->assertInstanceOf(Xsd::class, $service);
         $this->assertEquals($config['xsd_mappings'], $service->getMappings());
     }
 }

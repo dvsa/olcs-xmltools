@@ -3,8 +3,7 @@
 namespace Olcs\XmlTools\Validator;
 
 use Interop\Container\ContainerInterface;
-use Laminas\ServiceManager\FactoryInterface;
-use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class XsdFactory
@@ -14,7 +13,7 @@ class XsdFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null): Xsd
     {
-        $config = $container->getServiceLocator()->get('Config');
+        $config = $container->get('Config');
 
         $validator = new Xsd();
 
@@ -23,17 +22,5 @@ class XsdFactory implements FactoryInterface
         }
 
         return $validator;
-    }
-
-    /**
-     * Create service
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return mixed
-     * @deprecated No longer needed in Laminas 3
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator): Xsd
-    {
-        return $this($serviceLocator, Xsd::class);
     }
 }
