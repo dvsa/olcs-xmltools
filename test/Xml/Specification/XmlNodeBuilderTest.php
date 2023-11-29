@@ -35,12 +35,12 @@ class XmlNodeBuilderTest extends \PHPUnit\Framework\TestCase
             ]
         ];
 
-        $expectedReturn = '<?xml version="1.0" encoding="UTF-8"?>'."\n".
-            '<' . $parentElement . ' xmlns="' . $ns . '">'."\n".
-            '  <Body attributeOne="FirstAttribute" attributeTwo="SecondAttribute">'."\n".
-            '    <FirstNode>valueOne</FirstNode>'."\n".
-            '    <SecondNode>valueTwo</SecondNode>'."\n".
-            '  </Body>'."\n".
+        $expectedReturn = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
+            '<' . $parentElement . ' xmlns="' . $ns . '">' . "\n" .
+            '  <Body attributeOne="FirstAttribute" attributeTwo="SecondAttribute">' . "\n" .
+            '    <FirstNode>valueOne</FirstNode>' . "\n" .
+            '    <SecondNode>valueTwo</SecondNode>' . "\n" .
+            '  </Body>' . "\n" .
             '</' . $parentElement . '>';
 
         $sut = new XmlNodeBuilder($parentElement, $ns, $input);

@@ -11,8 +11,8 @@ use Laminas\Validator\Exception;
  */
 class Xsd extends AbstractValidator
 {
-    const INVALID_XML = 'invalid-xml';
-    const INVALID_XML_NO_ERROR = 'invalid-xml-no-error';
+    private const INVALID_XML = 'invalid-xml';
+    private const INVALID_XML_NO_ERROR = 'invalid-xml-no-error';
 
     /**
      * An array containing mappings of url xsd's to local file paths
@@ -80,7 +80,7 @@ class Xsd extends AbstractValidator
      *
      * @param array $mappings xsd mappings
      *
-     * @return $this
+     * @return void
      */
     public function setMappings($mappings)
     {
@@ -156,7 +156,7 @@ class Xsd extends AbstractValidator
                 $returnedErrors = array_values($errors);
 
                 //we're counting from zero, so we stop at one below the total number we need
-                for ($i=0; $i<$numShownErrors; $i++) {
+                for ($i = 0; $i < $numShownErrors; $i++) {
                     $error = $returnedErrors[$i];
 
                     $this->abstractOptions['messages'][] = sprintf(

@@ -12,7 +12,7 @@ class XsdFactoryTest extends TestCase
 {
     public function testInvoke(): void
     {
-        $config = ['xsd_mappings' => ['test'=> 'test.path']];
+        $config = ['xsd_mappings' => ['test' => 'test.path']];
 
         $container = m::mock(ContainerInterface::class);
         $container->shouldReceive('get')->with('Config')->andReturn($config);

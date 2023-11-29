@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Olcs\XmlTools\Xml\Specification;
-
 
 /**
  * Class AbstractCapturingNode
@@ -11,12 +9,12 @@ namespace Olcs\XmlTools\Xml\Specification;
 abstract class AbstractCapturingNode implements SpecificationInterface
 {
     /**
-     * @var string
+     * @var string|array
      */
     protected $destination;
 
     /**
-     * @return string
+     * @return string|array
      */
     public function getDestination()
     {
@@ -27,7 +25,7 @@ abstract class AbstractCapturingNode implements SpecificationInterface
      * @param $capturedValue
      * @return array
      */
-    protected function createReturnValue($capturedValue)
+    protected function createReturnValue($capturedValue): array
     {
         $destination = $this->getDestination();
 

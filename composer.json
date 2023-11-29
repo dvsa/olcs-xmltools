@@ -1,55 +1,55 @@
 {
     "name": "olcs/olcs-xmltools",
-    "description": "Xml tools for olcs",
-    "repositories": [
-        {
-            "packagist": false
-        },
-        {
-            "url": "https://nexus.olcs.dev-dvsacloud.uk/repository/OLCS",
-            "type": "composer"
-        },
-        {
-            "url": "https://nexus.olcs.dev-dvsacloud.uk/repository/Packagist-Proxy",
-            "type": "composer"
-        }
-    ],
+    "description": "XML tools for OLCS",
     "require": {
-        "php": ">=7.4",
-        "olcs/olcs-laminas": "~2.5.0 || ~3.0.0"
+        "php": "^7.4",
+        "ext-dom": "*",
+        "ext-libxml": "*",
+        "laminas/laminas-stdlib": "^3.0",
+        "laminas/laminas-servicemanager": "^3.0",
+        "laminas/laminas-filter": "^2.0",
+        "laminas/laminas-xml": "^1.2",
+        "laminas/laminas-validator": "^2.0"
     },
     "require-dev": {
-        "olcs/olcs-devtools": "~4.206.0"
-    },
-    "config": {
-        "secure-http": false,
-        "allow-plugins": {
-            "phpstan/extension-installer": true,
-            "laminas/laminas-component-installer": true,
-            "laminas/laminas-dependency-plugin": true,
-            "elendev/composer-push": true
-        }
+        "phpunit/phpunit": "^9.6",
+        "mockery/mockery": "^1.6",
+        "johnkary/phpunit-speedtrap": "^4.0",
+        "bamarni/composer-bin-plugin": "^1.8",
+        "mikey179/vfsstream": "^1.6.11"
     },
     "autoload": {
         "psr-4": {
-            "Olcs\\XmlTools\\": "src//"
+            "Olcs\\XmlTools\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "OlcsTest\\XmlTools\\": "test/"
         }
     },
     "scripts": {
-        "ut": "vendor/bin/phpunit -c test/phpunit.xml --stop-on-failure",
-        "review": "vendor/bin/review",
-        "cs": "vendor/bin/phpcs --severity=1 --standard=vendor/dvsa/coding-standards/src/Profiles/DVSA/CS/ruleset.xml",
-        "coverage": "vendor/bin/phpunit -c test/phpunit.xml --coverage-html ./test/coverage/html",
-        "sonar": "vendor/bin/phpunit -c test/phpunit.xml --coverage-clover ./test/coverage/coverage-report.clover --log-junit ./test/coverage/log.junit",
-        "update-syms": "vendor/bin/composer-update-syms"
+        "bin": "echo 'bin not installed'",
+        "test": "phpunit",
+        "phpcs": "phpcs",
+        "psalm": "psalm",
+        "phpstan": "phpstan",
+        "all": [
+            "@test",
+            "@phpcs",
+            "@psalm",
+            "@phpstan"
+        ]
     },
     "extra": {
-        "nexus-push": {
-            "url": "https://nexus.olcs.dev-dvsacloud.uk/repository/olcs-xmltools",
-            "ignore": [
-                "test/",
-                "sonar-project.properties"
-            ]
+        "bamarni-bin": {
+            "bin-links": true,
+            "forward-command": true
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "bamarni/composer-bin-plugin": true
         }
     }
 }
