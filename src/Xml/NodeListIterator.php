@@ -3,8 +3,7 @@
 namespace Olcs\XmlTools\Xml;
 
 /**
- * Class NodeListIterator
- * @package Olcs\XmlTools\Xml
+ * @template-implements \Iterator<int, \DOMNode>
  */
 class NodeListIterator implements \Iterator
 {

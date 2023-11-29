@@ -5,8 +5,7 @@ namespace Olcs\XmlTools\Xml;
 use Iterator;
 
 /**
- * Class TagNameFilterIterator
- * @package Olcs\XmlTools\Xml
+ * @template-extends \FilterIterator<int, \DOMNode, \Iterator<int, \DOMNode>>
  */
 class TagNameFilterIterator extends \FilterIterator
 {
@@ -31,7 +30,7 @@ class TagNameFilterIterator extends \FilterIterator
      * @link http://php.net/manual/en/filteriterator.accept.php
      * @return bool true if the current element is acceptable, otherwise false.
      */
-    public function accept()
+    public function accept(): bool
     {
         return isset($this->tags[$this->getInnerIterator()->current()->tagName]);
     }

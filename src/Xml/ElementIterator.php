@@ -3,18 +3,14 @@
 namespace Olcs\XmlTools\Xml;
 
 /**
- * Class ElementIterator
- * @package Olcs\XmlTools\Xml
+ * @template-extends \FilterIterator<int, \DOMNode, \Iterator<int, \DOMNode>>
  */
 class ElementIterator extends \FilterIterator
 {
     /**
-     * (PHP 5 &gt;= 5.1.0)<br/>
-     * Check whether the current element of the iterator is acceptable
-     * @link http://php.net/manual/en/filteriterator.accept.php
-     * @return bool true if the current element is acceptable, otherwise false.
+     * @template-extends \Iterator<int, \DOMElement>
      */
-    public function accept()
+    public function accept(): bool
     {
         return $this->getInnerIterator()->current() instanceof \DOMElement;
     }
