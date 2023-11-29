@@ -1,6 +1,5 @@
 <?php
 
-
 namespace OlcsTest\XmlTools\Xml;
 
 use Olcs\XmlTools\Xml\TemplateBuilder;

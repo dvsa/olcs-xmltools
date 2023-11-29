@@ -1,6 +1,7 @@
 <?php
 
 namespace Olcs\XmlTools;
+
 use Olcs\XmlTools\Validator\Xsd;
 use Olcs\XmlTools\Validator\XsdFactory;
 use Olcs\XmlTools\Filter\MapXmlFile;
@@ -47,6 +48,5 @@ class Module
      */
     public function getAutoloaderConfig()
     {
-
     }
 }

@@ -125,7 +125,7 @@ class XmlNodeBuilder extends \DOMDocument
             }
 
             //if the element has child nodes
-            if(isset($values['nodes'])) {
+            if (isset($values['nodes'])) {
                 self::createFromArray($values['nodes'], $newElement);
             }
 

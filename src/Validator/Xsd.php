@@ -156,7 +156,7 @@ class Xsd extends AbstractValidator
                 $returnedErrors = array_values($errors);
 
                 //we're counting from zero, so we stop at one below the total number we need
-                for ($i=0; $i<$numShownErrors; $i++) {
+                for ($i = 0; $i < $numShownErrors; $i++) {
                     $error = $returnedErrors[$i];
 
                     $this->abstractOptions['messages'][] = sprintf(
