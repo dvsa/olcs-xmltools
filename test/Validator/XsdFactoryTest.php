@@ -2,7 +2,7 @@
 
 namespace OlcsTest\XmlTools\Validator;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Olcs\XmlTools\Validator\Xsd;
 use Olcs\XmlTools\Validator\XsdFactory;
 use Mockery as m;
