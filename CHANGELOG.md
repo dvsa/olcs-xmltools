@@ -1,5 +1,16 @@
 # Changelog
 
+## [6.0.0](https://github.com/dvsa/olcs-xmltools/compare/v5.0.0...v6.0.0) (2024-02-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* interop/container no longer supported
+
+### Features
+
+* VOL-3691 switch to Psr Container ([#8](https://github.com/dvsa/olcs-xmltools/issues/8)) ([19d8ab7](https://github.com/dvsa/olcs-xmltools/commit/19d8ab7563305ee357ed336526a48525b6d1e14d))
+
 ## [5.0.0](https://github.com/dvsa/olcs-xmltools/compare/v5.0.0...v5.0.0) (2024-02-14)
 
 
