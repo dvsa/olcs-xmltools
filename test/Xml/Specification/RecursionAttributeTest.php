@@ -17,7 +17,7 @@ class RecursionAttributeTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests the apply function
      */
-    public function testApply()
+    public function testApply(): void
     {
         $value = 'Value';
         $value2 = 'Value2';
@@ -34,14 +34,14 @@ class RecursionAttributeTest extends \PHPUnit\Framework\TestCase
             new NodeAttribute('value2', 'value2'),
         ];
 
-        $dom = new \DOMDocument();
+        $domDocument = new \DOMDocument();
         $xml = '<Doc><TestTag value="' . $value . '" value2="' . $value2 . '"></TestTag>
         <OtherTag value="this is not the value you are looking for"></OtherTag></Doc>';
-        $dom->loadXML($xml);
+        $domDocument->loadXML($xml);
 
-        $sut = new RecursionAttribute(['TestTag' => $spec]);
+        $recursionAttribute = new RecursionAttribute(['TestTag' => $spec]);
 
-        $result = $sut->apply($dom->documentElement);
+        $result = $recursionAttribute->apply($domDocument->documentElement);
 
         $this->assertEquals($expectedResult, $result);
     }
@@ -49,7 +49,7 @@ class RecursionAttributeTest extends \PHPUnit\Framework\TestCase
     /**
      * Tests the apply function
      */
-    public function testApplyWithShorthands()
+    public function testApplyWithShorthands(): void
     {
         $value = 'Value';
         $value2 = 'Value2';
@@ -60,16 +60,16 @@ class RecursionAttributeTest extends \PHPUnit\Framework\TestCase
             ]
         ];
 
-        $spec = new NodeAttribute('value', 'value');
+        $nodeAttribute = new NodeAttribute('value', 'value');
 
-        $dom = new \DOMDocument();
+        $domDocument = new \DOMDocument();
         $xml = '<Doc><TestTag value="' . $value . '" value2="' . $value2 . '"></TestTag>
         <OtherTag value="this is not the value you are looking for"></OtherTag></Doc>';
-        $dom->loadXML($xml);
+        $domDocument->loadXML($xml);
 
-        $sut = new RecursionAttribute('TestTag', $spec);
+        $recursionAttribute = new RecursionAttribute('TestTag', $nodeAttribute);
 
-        $result = $sut->apply($dom->documentElement);
+        $result = $recursionAttribute->apply($domDocument->documentElement);
 
         $this->assertEquals($expectedResult, $result);
     }

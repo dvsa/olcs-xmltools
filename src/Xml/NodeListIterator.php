@@ -17,13 +17,11 @@ class NodeListIterator implements \Iterator
      */
     protected $key = 0;
 
-    /**
-     * @param \DOMNodeList $target
-     */
-    public function __construct(\DOMNodeList $target)
+    public function __construct(\DOMNodeList $domNodeList)
     {
-        $this->target = $target;
+        $this->target = $domNodeList;
     }
+
     /**
      * (PHP 5 &gt;= 5.0.0)<br/>
      * Return the current element
@@ -41,9 +39,9 @@ class NodeListIterator implements \Iterator
      * @link http://php.net/manual/en/iterator.next.php
      * @return void Any returned value is ignored.
      */
-    public function next()
+    public function next(): void
     {
-        $this->key++;
+        ++$this->key;
     }
 
     /**
@@ -75,7 +73,7 @@ class NodeListIterator implements \Iterator
      * @link http://php.net/manual/en/iterator.rewind.php
      * @return void Any returned value is ignored.
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->key = 0;
     }

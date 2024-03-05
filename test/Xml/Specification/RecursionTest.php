@@ -14,28 +14,28 @@ use Olcs\XmlTools\Xml\Specification\Recursion;
  */
 class RecursionTest extends \PHPUnit\Framework\TestCase
 {
-    public function testApply()
+    public function testApply(): void
     {
-        $dom = new \DOMDocument();
+        $domDocument = new \DOMDocument();
         $xml = '<Doc><TestTag>Value</TestTag><OtherTag>this is not the value you are looking for</OtherTag></Doc>';
-        $dom->loadXML($xml);
+        $domDocument->loadXML($xml);
 
-        $sut = new Recursion(['TestTag' => [new NodeValue('testprop')]]);
+        $recursion = new Recursion(['TestTag' => [new NodeValue('testprop')]]);
 
-        $result = $sut->apply($dom->documentElement);
+        $result = $recursion->apply($domDocument->documentElement);
 
         $this->assertEquals(['testprop' => 'Value'], $result);
     }
 
-    public function testApplyWithShorthands()
+    public function testApplyWithShorthands(): void
     {
-        $dom = new \DOMDocument();
+        $domDocument = new \DOMDocument();
         $xml = '<Doc><TestTag>Value</TestTag><OtherTag>this is not the value you are looking for</OtherTag></Doc>';
-        $dom->loadXML($xml);
+        $domDocument->loadXML($xml);
 
-        $sut = new Recursion('TestTag', new NodeValue('testprop'));
+        $recursion = new Recursion('TestTag', new NodeValue('testprop'));
 
-        $result = $sut->apply($dom->documentElement);
+        $result = $recursion->apply($domDocument->documentElement);
 
         $this->assertEquals(['testprop' => 'Value'], $result);
     }

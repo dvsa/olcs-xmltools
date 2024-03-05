@@ -10,15 +10,15 @@ use Olcs\XmlTools\Xml\Specification\NodeAttribute;
  */
 class NodeAttributeTest extends \PHPUnit\Framework\TestCase
 {
-    public function testApply()
+    public function testApply(): void
     {
-        $document = new \DOMDocument();
-        $element = $document->createElement('Test');
+        $domDocument = new \DOMDocument();
+        $element = $domDocument->createElement('Test');
         $element->setAttribute('id', 74);
 
-        $sut = new NodeAttribute('testprop', 'id');
+        $nodeAttribute = new NodeAttribute('testprop', 'id');
 
-        $result = $sut->apply($element);
+        $result = $nodeAttribute->apply($element);
 
         $this->assertEquals(['testprop' => 74], $result);
     }

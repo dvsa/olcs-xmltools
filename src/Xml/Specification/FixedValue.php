@@ -32,10 +32,9 @@ class FixedValue extends AbstractCapturingNode
     }
 
     /**
-     * @param \DOMElement $element
      * @return mixed
      */
-    public function apply(\DOMElement $element)
+    public function apply(\DOMElement $domElement)
     {
         return $this->createReturnValue($this->getValue());
     }

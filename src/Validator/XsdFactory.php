@@ -15,12 +15,12 @@ class XsdFactory implements FactoryInterface
     {
         $config = $container->get('Config');
 
-        $validator = new Xsd();
+        $xsd = new Xsd();
 
         if (isset($config['xsd_mappings'])) {
-            $validator->setMappings($config['xsd_mappings']);
+            $xsd->setMappings($config['xsd_mappings']);
         }
 
-        return $validator;
+        return $xsd;
     }
 }

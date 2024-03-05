@@ -17,9 +17,9 @@ class XsdFactoryTest extends TestCase
         $container = m::mock(ContainerInterface::class);
         $container->shouldReceive('get')->with('Config')->andReturn($config);
 
-        $sut = new XsdFactory();
+        $xsdFactory = new XsdFactory();
 
-        $service = $sut->__invoke($container, Xsd::class);
+        $service = $xsdFactory->__invoke($container, Xsd::class);
 
         $this->assertInstanceOf(Xsd::class, $service);
         $this->assertEquals($config['xsd_mappings'], $service->getMappings());

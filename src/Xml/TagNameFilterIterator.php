@@ -15,7 +15,6 @@ class TagNameFilterIterator extends \FilterIterator
     protected $tags;
 
     /**
-     * @param Iterator $iterator
      * @param array $tags
      */
     public function __construct(Iterator $iterator, $tags = [])

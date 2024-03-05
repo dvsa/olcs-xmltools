@@ -13,7 +13,7 @@ use Mockery as m;
  */
 class MultiRecursionValueTest extends TestCase
 {
-    public function testApply()
+    public function testApply(): void
     {
         $nodeValue = 'hello';
         $expectedResult = [
@@ -22,17 +22,17 @@ class MultiRecursionValueTest extends TestCase
             ]
         ];
 
-        $document = new \DOMDocument();
-        $element = $document->createElement('Test');
+        $domDocument = new \DOMDocument();
+        $element = $domDocument->createElement('Test');
         $element->nodeValue = $nodeValue;
 
         $recursion = m::mock(SpecificationInterface::class);
         $recursion->shouldReceive('apply')->with($element)->andReturn([$nodeValue]);
 
-        $sut = new MultiRecursionValue('testprop', $recursion);
-        $sut->apply($element);
+        $multiRecursionValue = new MultiRecursionValue('testprop', $recursion);
+        $multiRecursionValue->apply($element);
 
-        $result = $sut->apply($element);
+        $result = $multiRecursionValue->apply($element);
 
         $this->assertEquals($expectedResult, $result);
     }
