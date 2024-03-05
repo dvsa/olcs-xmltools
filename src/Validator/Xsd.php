@@ -111,7 +111,7 @@ class Xsd extends AbstractValidator
      * getMessages() will return an array of messages that explain why the
      * validation failed.
      *
-     * @param \DOMDocument $value XML Document to validate
+     * @param \DOMDocument|mixed $value XML Document to validate
      *
      * @return bool
      * @throws Exception\RuntimeException If validation of $value is impossible
@@ -145,7 +145,7 @@ class Xsd extends AbstractValidator
             } else {
                 $numShownErrors = min($totalErrors, $this->maxErrors);
 
-                $this->error(self::INVALID_XML, $numShownErrors);
+                $this->error(self::INVALID_XML, (string) $numShownErrors);
 
                 //reindex as some may have been removed
                 $returnedErrors = array_values($errors);

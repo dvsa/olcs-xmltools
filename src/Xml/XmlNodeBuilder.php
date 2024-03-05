@@ -102,9 +102,9 @@ class XmlNodeBuilder extends \DOMDocument
     /**
      * Creates the XML document, requires an array of data and a parent element
      *
-     * @return \DOMElement
+     * @return \DOMElement|null
      */
-    private function createFromArray(array $data, \DOMElement $domElement = null)
+    private function createFromArray(array $data, \DOMElement $domElement = null): ?\DOMElement
     {
         foreach ($data as $values) {
             //create the element, and give it a value is it has one

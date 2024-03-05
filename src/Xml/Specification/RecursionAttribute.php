@@ -53,6 +53,7 @@ class RecursionAttribute implements SpecificationInterface
         $iterator = new ElementIterator($iterator);
         $iterator = new TagNameFilterIterator($iterator, array_keys($specification));
 
+        /** @var \DOMElement $element */
         foreach ($iterator as $element) {
             $result[$count] = [];
             $spec = $specification[$element->tagName];

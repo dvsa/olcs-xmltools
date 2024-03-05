@@ -2,6 +2,8 @@
 
 namespace Olcs\XmlTools\Xml;
 
+use DOMNode;
+
 /**
  * @template-implements \Iterator<int, \DOMNode>
  */
@@ -26,7 +28,7 @@ class NodeListIterator implements \Iterator
      * (PHP 5 &gt;= 5.0.0)<br/>
      * Return the current element
      * @link http://php.net/manual/en/iterator.current.php
-     * @return mixed Can return any type.
+     * @return DOMNode|null Can return any type.
      */
     public function current()
     {
@@ -48,7 +50,7 @@ class NodeListIterator implements \Iterator
      * (PHP 5 &gt;= 5.0.0)<br/>
      * Return the key of the current element
      * @link http://php.net/manual/en/iterator.key.php
-     * @return mixed scalar on success, or null on failure.
+     * @return int|null scalar on success, or null on failure.
      */
     public function key()
     {
