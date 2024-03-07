@@ -27,7 +27,7 @@ class MultiRecursionValueTest extends TestCase
         $element->nodeValue = $nodeValue;
 
         $recursion = m::mock(SpecificationInterface::class);
-        $recursion->shouldReceive('apply')->with($element)->andReturn([$nodeValue]);
+        $recursion->shouldReceive('apply')->twice()->with($element)->andReturn([$nodeValue]);
 
         $multiRecursionValue = new MultiRecursionValue('testprop', $recursion);
         $multiRecursionValue->apply($element);

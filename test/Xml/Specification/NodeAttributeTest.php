@@ -14,12 +14,12 @@ class NodeAttributeTest extends \PHPUnit\Framework\TestCase
     {
         $domDocument = new \DOMDocument();
         $element = $domDocument->createElement('Test');
-        $element->setAttribute('id', 74);
+        $element->setAttribute('id', '74');
 
         $nodeAttribute = new NodeAttribute('testprop', 'id');
 
         $result = $nodeAttribute->apply($element);
 
-        $this->assertEquals(['testprop' => 74], $result);
+        $this->assertEquals(['testprop' => '74'], $result);
     }
 }

@@ -20,9 +20,6 @@ class XmlNodeBuilder extends \DOMDocument
      */
     private $data;
 
-    /**
-     * @var
-     */
     private $xmlNs;
 
     /**

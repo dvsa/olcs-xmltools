@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace OlcsTest\XmlTools\Validator;
 
 use Olcs\XmlTools\Validator\Xsd;
@@ -76,7 +78,7 @@ XSD;
         $domDocument = new DOMDocument();
         $domDocument->loadXml($xml);
 
-        /** @var Xsd $sut */
+        /** @var Xsd|m\MockInterface $sut */
         $sut = m::mock(Xsd::class)->makePartial();
         $sut->setMappings(
             [
@@ -90,7 +92,7 @@ XSD;
 
         $sut->setXmlMessageExclude(['message 2', 'message 3']); //message 2 and 3 are excluded
 
-        $sut->shouldReceive('getXmlErrors')->once()->andReturn($libXmlErrors);
+        $sut->expects('getXmlErrors')->andReturn($libXmlErrors);
         $this->assertEquals(false, $sut->isValid($domDocument));
 
         $messages = $sut->getMessages();
@@ -100,9 +102,8 @@ XSD;
         // laminas-validator 2.11.1 will include an extra message 'invalid-xml', 2.25.0 will not
         $expectedErrorCount = array_key_exists('invalid-xml', $messages) ? 3 : 2;
         $this->assertCount($expectedErrorCount, $messages);
-        // $this->assertArrayHasKey('invalid-xml', $messages);
-        $this->assertEquals($expectedMessage1, $messages[0]);
-        $this->assertEquals($expectedMessage2, $messages[1]);
+        $this->assertContains($expectedMessage1, $messages);
+        $this->assertContains($expectedMessage2, $messages);
     }
 
     /**
@@ -137,7 +138,7 @@ XSD;
         $domDocument = new DOMDocument();
         $domDocument->loadXml($xml);
 
-        /** @var Xsd $sut */
+        /** @var Xsd|m\MockInterface $sut */
         $sut = m::mock(Xsd::class)->makePartial();
         $sut->setMappings(
             [
@@ -150,7 +151,7 @@ XSD;
 
         $sut->setXmlMessageExclude(['error message']); //will exclude both messages
 
-        $sut->shouldReceive('getXmlErrors')->once()->andReturn($libXmlErrors);
+        $sut->expects('getXmlErrors')->andReturn($libXmlErrors);
         $this->assertEquals(false, $sut->isValid($domDocument));
 
         $messages = $sut->getMessages();

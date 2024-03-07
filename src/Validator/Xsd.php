@@ -191,9 +191,9 @@ class Xsd extends AbstractValidator
                 }
                 $message = sprintf(
                     "Failed to load external entity: Public: %s; System: %s; Context: %s",
-                    var_export($public, 1),
-                    var_export($system, 1),
-                    strtr(var_export($context, 1), [" (\n  " => '(', "\n " => '', "\n" => ''])
+                    var_export($public, true),
+                    var_export($system, true),
+                    strtr(var_export($context, true), [" (\n  " => '(', "\n " => '', "\n" => ''])
                 );
                 throw new \RuntimeException($message);
             }

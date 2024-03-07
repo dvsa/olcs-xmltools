@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace OlcsTest\XmlTools\Validator;
 
 use Psr\Container\ContainerInterface;

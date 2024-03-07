@@ -8,9 +8,6 @@ namespace Olcs\XmlTools\Xml\Specification;
  */
 class FixedValue extends AbstractCapturingNode
 {
-    /**
-     * @var
-     */
     protected $value;
 
     /**
