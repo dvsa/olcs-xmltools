@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.0.1](https://github.com/dvsa/olcs-xmltools/compare/v6.0.0...v6.0.1) (2024-03-07)
+
+
+### Bug Fixes
+
+* Vol-4753 code quality improvements, PhpStan and Psalm both pass at level 5 ([#10](https://github.com/dvsa/olcs-xmltools/issues/10)) ([5190420](https://github.com/dvsa/olcs-xmltools/commit/51904204161954fabaac56614258e239d33c4a68))
+
 ## [6.0.0](https://github.com/dvsa/olcs-xmltools/compare/v5.0.0...v6.0.0) (2024-02-19)
 
 
