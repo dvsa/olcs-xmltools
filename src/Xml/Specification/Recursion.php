@@ -39,19 +39,19 @@ class Recursion implements SpecificationInterface
     }
 
     /**
-     * @param \DOMElement $parentElement
      * @return array
      */
-    public function apply(\DOMElement $parentElement)
+    public function apply(\DOMElement $domElement)
     {
         $result = [];
         $specification = $this->getSpecification();
-        $nodeList = $parentElement->childNodes;
+        $nodeList = $domElement->childNodes;
 
         $iterator = new NodeListIterator($nodeList);
         $iterator = new ElementIterator($iterator);
         $iterator = new TagNameFilterIterator($iterator, array_keys($specification));
 
+        /** @var \DOMElement $element */
         foreach ($iterator as $element) {
             $spec = $specification[$element->tagName];
             if (!is_array($spec)) {

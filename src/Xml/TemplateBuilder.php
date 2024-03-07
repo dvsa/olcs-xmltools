@@ -20,13 +20,13 @@ class TemplateBuilder
      */
     public function buildTemplate($templatePath, array $substitutions)
     {
-        $dom = new \DOMDocument();
-        $dom->load($templatePath);
+        $domDocument = new \DOMDocument();
+        $domDocument->load($templatePath);
 
         foreach ($substitutions as $key => $value) {
-            $dom->getElementsByTagName($key)->item(0)->nodeValue = htmlspecialchars($value);
+            $domDocument->getElementsByTagName($key)->item(0)->nodeValue = htmlspecialchars($value);
         }
 
-        return $dom->saveXML();
+        return $domDocument->saveXML();
     }
 }

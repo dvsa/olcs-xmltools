@@ -13,21 +13,21 @@ use Mockery as m;
  */
 class RecursionValueTest extends TestCase
 {
-    public function testApply()
+    public function testApply(): void
     {
         $nodeValue = 'hello';
 
-        $document = new \DOMDocument();
-        $element = $document->createElement('Test');
+        $domDocument = new \DOMDocument();
+        $element = $domDocument->createElement('Test');
         $element->nodeValue = $nodeValue;
 
         $recursion = m::mock(SpecificationInterface::class);
         $recursion->shouldReceive('apply')->with($element)->andReturn([$nodeValue]);
 
-        $sut = new RecursionValue('testprop', $recursion);
-        $sut->apply($element);
+        $recursionValue = new RecursionValue('testprop', $recursion);
+        $recursionValue->apply($element);
 
-        $result = $sut->apply($element);
+        $result = $recursionValue->apply($element);
 
         $this->assertEquals(['testprop' => [$nodeValue]], $result);
     }

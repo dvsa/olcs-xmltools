@@ -9,14 +9,14 @@ namespace Olcs\XmlTools\Xml\Specification;
 class MultiRecursionValue extends AbstractCapturingNode
 {
     protected $recursion;
+
     /**
      * @param $destination
-     * @param SpecificationInterface $recursion
      */
-    public function __construct($destination, SpecificationInterface $recursion)
+    public function __construct($destination, SpecificationInterface $specification)
     {
         $this->destination = $destination;
-        $this->recursion = $recursion;
+        $this->recursion = $specification;
     }
 
     /**
@@ -28,11 +28,10 @@ class MultiRecursionValue extends AbstractCapturingNode
     }
 
     /**
-     * @param \DOMElement $element
      * @return array
      */
-    public function apply(\DOMElement $element)
+    public function apply(\DOMElement $domElement)
     {
-        return $this->createReturnValue([$this->getRecursion()->apply($element)]);
+        return $this->createReturnValue([$this->getRecursion()->apply($domElement)]);
     }
 }

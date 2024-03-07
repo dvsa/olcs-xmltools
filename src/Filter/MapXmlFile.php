@@ -25,12 +25,9 @@ class MapXmlFile extends AbstractFilter
         return $this->mapping;
     }
 
-    /**
-     * @param SpecificationInterface $mapper
-     */
-    public function setMapping(SpecificationInterface $mapper)
+    public function setMapping(SpecificationInterface $specification): void
     {
-        $this->mapping = $mapper;
+        $this->mapping = $specification;
     }
 
     /**

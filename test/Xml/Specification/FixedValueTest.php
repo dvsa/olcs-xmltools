@@ -10,15 +10,15 @@ use Olcs\XmlTools\Xml\Specification\FixedValue;
  */
 class FixedValueTest extends \PHPUnit\Framework\TestCase
 {
-    public function testApply()
+    public function testApply(): void
     {
-        $document = new \DOMDocument();
-        $element = $document->createElement('Test');
+        $domDocument = new \DOMDocument();
+        $element = $domDocument->createElement('Test');
         $element->nodeValue = 'hello';
 
-        $sut = new FixedValue(['destination', 'as', 'array'], 'value');
+        $fixedValue = new FixedValue(['destination', 'as', 'array'], 'value');
 
-        $result = $sut->apply($element);
+        $result = $fixedValue->apply($element);
 
         $this->assertSame(['destination' => ['as' => ['array' => 'value']]], $result);
     }

@@ -22,9 +22,9 @@ class ParseXml extends AbstractFilter
      */
     public function filter($value)
     {
-        $dom = new DOMDocument();
-        Security::scan(file_get_contents($value), $dom);
+        $domDocument = new DOMDocument();
+        Security::scan(file_get_contents($value), $domDocument);
 
-        return $dom;
+        return $domDocument;
     }
 }

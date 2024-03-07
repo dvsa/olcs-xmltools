@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace OlcsTest\XmlTools\Validator;
 
 use Olcs\XmlTools\Validator\Xsd;
@@ -26,7 +28,7 @@ XSD;
      * We ask for a maximum of 2 errors, and have excluded errors 2 and 3 through setXmlMessageExclude
      * Therefore errors 1 and 4 are what we return
      */
-    public function testIsValidFalse()
+    public function testIsValidFalse(): void
     {
         libxml_clear_errors();
         $xml = '<doc><test></test><test></test></doc>';
@@ -73,10 +75,10 @@ XSD;
 
         file_put_contents($xsdFile, $this->xsd);
 
-        $dom = new DOMDocument();
-        $dom->loadXml($xml);
+        $domDocument = new DOMDocument();
+        $domDocument->loadXml($xml);
 
-        /** @var Xsd $sut */
+        /** @var Xsd|m\MockInterface $sut */
         $sut = m::mock(Xsd::class)->makePartial();
         $sut->setMappings(
             [
@@ -90,8 +92,8 @@ XSD;
 
         $sut->setXmlMessageExclude(['message 2', 'message 3']); //message 2 and 3 are excluded
 
-        $sut->shouldReceive('getXmlErrors')->once()->andReturn($libXmlErrors);
-        $this->assertEquals(false, $sut->isValid($dom));
+        $sut->expects('getXmlErrors')->andReturn($libXmlErrors);
+        $this->assertEquals(false, $sut->isValid($domDocument));
 
         $messages = $sut->getMessages();
         $expectedMessage1 = 'XML error "*error message*" on line 111 column 222';
@@ -100,16 +102,15 @@ XSD;
         // laminas-validator 2.11.1 will include an extra message 'invalid-xml', 2.25.0 will not
         $expectedErrorCount = array_key_exists('invalid-xml', $messages) ? 3 : 2;
         $this->assertCount($expectedErrorCount, $messages);
-        // $this->assertArrayHasKey('invalid-xml', $messages);
-        $this->assertEquals($expectedMessage1, $messages[0]);
-        $this->assertEquals($expectedMessage2, $messages[1]);
+        $this->assertContains($expectedMessage1, $messages);
+        $this->assertContains($expectedMessage2, $messages);
     }
 
     /**
      * Tests what happens when the document doesn't validate against the schema,
      * but all errors are excluded due to containing paths
      */
-    public function testIsValidFalseNoExtraMessages()
+    public function testIsValidFalseNoExtraMessages(): void
     {
         libxml_clear_errors();
         $xml = '<doc><test></test><test></test></doc>';
@@ -134,10 +135,10 @@ XSD;
 
         file_put_contents($xsdFile, $this->xsd);
 
-        $dom = new DOMDocument();
-        $dom->loadXml($xml);
+        $domDocument = new DOMDocument();
+        $domDocument->loadXml($xml);
 
-        /** @var Xsd $sut */
+        /** @var Xsd|m\MockInterface $sut */
         $sut = m::mock(Xsd::class)->makePartial();
         $sut->setMappings(
             [
@@ -150,8 +151,8 @@ XSD;
 
         $sut->setXmlMessageExclude(['error message']); //will exclude both messages
 
-        $sut->shouldReceive('getXmlErrors')->once()->andReturn($libXmlErrors);
-        $this->assertEquals(false, $sut->isValid($dom));
+        $sut->expects('getXmlErrors')->andReturn($libXmlErrors);
+        $this->assertEquals(false, $sut->isValid($domDocument));
 
         $messages = $sut->getMessages();
 
@@ -165,7 +166,7 @@ XSD;
      * @dataProvider provideIsValid
      * @param $xml
      */
-    public function testIsValid($xml)
+    public function testIsValid($xml): void
     {
         libxml_clear_errors();
         vfsStream::setup('root');
@@ -173,18 +174,18 @@ XSD;
 
         file_put_contents($xsdFile, $this->xsd);
 
-        $dom = new DOMDocument();
-        $dom->loadXml($xml);
+        $domDocument = new DOMDocument();
+        $domDocument->loadXml($xml);
 
-        $sut = new Xsd();
-        $sut->setMappings(
+        $xsd = new Xsd();
+        $xsd->setMappings(
             [
                 'http://schemafile.com/xsdfile.xsd' => $xsdFile,
                 'http://www.w3.org/2001/XMLSchema' => __DIR__ . '/../../../../data/xsd/xml.xsd'
                 ]
         );
-        $sut->setXsd('http://schemafile.com/xsdfile.xsd');
-        $this->assertEquals(true, $sut->isValid($dom));
+        $xsd->setXsd('http://schemafile.com/xsdfile.xsd');
+        $this->assertEquals(true, $xsd->isValid($domDocument));
     }
 
     public function provideIsValid()
@@ -195,11 +196,12 @@ XSD;
         ];
     }
 
-    public function testIsValidWithoutMapping()
+    public function testIsValidWithoutMapping(): void
     {
         libxml_clear_errors();
-        $xml = new DOMDocument();
-        $xml->loadXML('<test></test>');
+        $domDocument = new DOMDocument();
+        $domDocument->loadXML('<test></test>');
+
         $valid = true;
 
         vfsStream::setup('root');
@@ -207,36 +209,37 @@ XSD;
 
         file_put_contents($xsdFile, $this->xsd);
 
-        $sut = new Xsd();
-        $sut->setMappings(
+        $xsd = new Xsd();
+        $xsd->setMappings(
             ['http://www.w3.org/2001/XMLSchema' => __DIR__ . '/../../../../data/xsd/xml.xsd']
         );
-        $sut->setXsd($xsdFile);
-        $this->assertEquals($valid, $sut->isValid($xml));
+        $xsd->setXsd($xsdFile);
+        $this->assertEquals($valid, $xsd->isValid($domDocument));
     }
 
-    public function testIsValidWithInvalidXsd()
+    public function testIsValidWithInvalidXsd(): void
     {
         libxml_clear_errors();
-        $xml = new DOMDocument();
-        $xml->loadXML('<test></test>');
+        $domDocument = new DOMDocument();
+        $domDocument->loadXML('<test></test>');
+
         $valid = true;
 
         vfsStream::setup('root');
         $xsdFile = vfsStream::url('root/xsdfile.xsd');
 
-        $sut = new Xsd();
-        $sut->setMappings(
+        $xsd = new Xsd();
+        $xsd->setMappings(
             ['http://www.w3.org/2001/XMLSchema' => __DIR__ . '/../../../../data/xsd/xml.xsd']
         );
-        $sut->setXsd($xsdFile);
+        $xsd->setXsd($xsdFile);
 
         $passed = false;
         try {
-            $this->assertEquals($valid, $sut->isValid($xml));
-        } catch (\RuntimeException $e) {
+            $this->assertEquals($valid, $xsd->isValid($domDocument));
+        } catch (\RuntimeException $runtimeException) {
             $expectedMessage = 'Failed to load external entity:';
-            if (substr($e->getMessage(), 0, strlen($expectedMessage)) == $expectedMessage) {
+            if (substr($runtimeException->getMessage(), 0, strlen($expectedMessage)) == $expectedMessage) {
                 $passed = true;
             }
         }
@@ -244,22 +247,22 @@ XSD;
         $this->assertTrue($passed, 'Expected exception not thrown');
     }
 
-    public function testMaxErrors()
+    public function testMaxErrors(): void
     {
         $maxErrors = 123;
 
-        $sut = new Xsd();
-        $sut->setMaxErrors($maxErrors);
-        $this->assertEquals($maxErrors, $sut->getMaxErrors());
+        $xsd = new Xsd();
+        $xsd->setMaxErrors($maxErrors);
+        $this->assertEquals($maxErrors, $xsd->getMaxErrors());
     }
 
     /**
      * getXmlErrors is there to assist unit testing, have included this here to maintain code coverage
      */
-    public function testGetXmlErrors()
+    public function testGetXmlErrors(): void
     {
         libxml_clear_errors();
-        $sut = new Xsd();
-        $this->assertEquals([], $sut->getXmlErrors());
+        $xsd = new Xsd();
+        $this->assertEquals([], $xsd->getXmlErrors());
     }
 }

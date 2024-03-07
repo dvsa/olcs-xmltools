@@ -23,7 +23,6 @@ abstract class AbstractCapturingNode implements SpecificationInterface
 
     /**
      * @param $capturedValue
-     * @return array
      */
     protected function createReturnValue($capturedValue): array
     {

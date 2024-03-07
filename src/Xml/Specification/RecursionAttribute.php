@@ -39,21 +39,21 @@ class RecursionAttribute implements SpecificationInterface
     }
 
     /**
-     * @param \DOMElement $parentElement
      * @return array
      */
-    public function apply(\DOMElement $parentElement)
+    public function apply(\DOMElement $domElement)
     {
         $result = [];
         $count = 0;
 
         $specification = $this->getSpecification();
-        $nodeList = $parentElement->childNodes;
+        $nodeList = $domElement->childNodes;
 
         $iterator = new NodeListIterator($nodeList);
         $iterator = new ElementIterator($iterator);
         $iterator = new TagNameFilterIterator($iterator, array_keys($specification));
 
+        /** @var \DOMElement $element */
         foreach ($iterator as $element) {
             $result[$count] = [];
             $spec = $specification[$element->tagName];
@@ -67,7 +67,7 @@ class RecursionAttribute implements SpecificationInterface
                 $result[$count] = ArrayUtils::merge($result[$count], $instruction->apply($element));
             }
 
-            $count++;
+            ++$count;
         }
 
         return $result;

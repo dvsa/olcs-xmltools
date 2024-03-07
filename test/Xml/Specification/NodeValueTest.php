@@ -10,15 +10,15 @@ use Olcs\XmlTools\Xml\Specification\NodeValue;
  */
 class NodeValueTest extends \PHPUnit\Framework\TestCase
 {
-    public function testApply()
+    public function testApply(): void
     {
-        $document = new \DOMDocument();
-        $element = $document->createElement('Test');
+        $domDocument = new \DOMDocument();
+        $element = $domDocument->createElement('Test');
         $element->nodeValue = 'hello';
 
-        $sut = new NodeValue('testprop');
+        $nodeValue = new NodeValue('testprop');
 
-        $result = $sut->apply($element);
+        $result = $nodeValue->apply($element);
 
         $this->assertEquals(['testprop' => 'hello'], $result);
     }

@@ -12,6 +12,7 @@ use Laminas\Validator\Exception;
 class Xsd extends AbstractValidator
 {
     private const INVALID_XML = 'invalid-xml';
+
     private const INVALID_XML_NO_ERROR = 'invalid-xml-no-error';
 
     /**
@@ -49,18 +50,16 @@ class Xsd extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = [
-        self::INVALID_XML => 'The xml file didn\'t validate against the schema (first %value% errors shown)',
-        self::INVALID_XML_NO_ERROR => 'The xml file didn\'t validate against the schema (no specific errors available)',
+        self::INVALID_XML => "The xml file didn't validate against the schema (first %value% errors shown)",
+        self::INVALID_XML_NO_ERROR => "The xml file didn't validate against the schema (no specific errors available)",
     ];
 
     /**
      * Sets the xsd
      *
      * @param mixed $xsd the xsd
-     *
-     * @return void
      */
-    public function setXsd($xsd)
+    public function setXsd($xsd): void
     {
         $this->xsd = $xsd;
     }
@@ -79,10 +78,8 @@ class Xsd extends AbstractValidator
      * Sets xsd mappings
      *
      * @param array $mappings xsd mappings
-     *
-     * @return void
      */
-    public function setMappings($mappings)
+    public function setMappings($mappings): void
     {
         $this->mappings = $mappings;
     }
@@ -101,10 +98,8 @@ class Xsd extends AbstractValidator
      * Sets the array of strings, if we find one in the message then it isn't returned
      *
      * @param array $xmlMessageExclude messages to exclude
-     *
-     * @return void
      */
-    public function setXmlMessageExclude(array $xmlMessageExclude)
+    public function setXmlMessageExclude(array $xmlMessageExclude): void
     {
         $this->xmlMessageExclude = $xmlMessageExclude;
     }
@@ -116,7 +111,7 @@ class Xsd extends AbstractValidator
      * getMessages() will return an array of messages that explain why the
      * validation failed.
      *
-     * @param \DOMDocument $value XML Document to validate
+     * @param \DOMDocument|mixed $value XML Document to validate
      *
      * @return bool
      * @throws Exception\RuntimeException If validation of $value is impossible
@@ -136,7 +131,7 @@ class Xsd extends AbstractValidator
 
             foreach ($errors as $key => $error) {
                 foreach ($this->xmlMessageExclude as $exclusion) {
-                    if (strpos($error->message, $exclusion) !== false) {
+                    if (strpos($error->message, (string) $exclusion) !== false) {
                         unset($errors[$key]);
                         break;
                     }
@@ -150,13 +145,13 @@ class Xsd extends AbstractValidator
             } else {
                 $numShownErrors = min($totalErrors, $this->maxErrors);
 
-                $this->error(self::INVALID_XML, $numShownErrors);
+                $this->error(self::INVALID_XML, (string) $numShownErrors);
 
                 //reindex as some may have been removed
                 $returnedErrors = array_values($errors);
 
                 //we're counting from zero, so we stop at one below the total number we need
-                for ($i = 0; $i < $numShownErrors; $i++) {
+                for ($i = 0; $i < $numShownErrors; ++$i) {
                     $error = $returnedErrors[$i];
 
                     $this->abstractOptions['messages'][] = sprintf(
@@ -187,23 +182,19 @@ class Xsd extends AbstractValidator
         $mapping = $this->getMappings();
 
         libxml_set_external_entity_loader(
-            function ($public, $system, $context) use ($mapping) {
-
+            static function ($public, $system, $context) use ($mapping) {
                 if (is_file($system)) {
                     return $system;
                 }
-
                 if (isset($mapping[$system])) {
                     return $mapping[$system];
                 }
-
                 $message = sprintf(
                     "Failed to load external entity: Public: %s; System: %s; Context: %s",
-                    var_export($public, 1),
-                    var_export($system, 1),
-                    strtr(var_export($context, 1), [" (\n  " => '(', "\n " => '', "\n" => ''])
+                    var_export($public, true),
+                    var_export($system, true),
+                    strtr(var_export($context, true), [" (\n  " => '(', "\n " => '', "\n" => ''])
                 );
-
                 throw new \RuntimeException($message);
             }
         );
@@ -223,10 +214,8 @@ class Xsd extends AbstractValidator
      * Sets the maximum number of errors to return
      *
      * @param int $maxErrors number of errors to return
-     *
-     * @return void
      */
-    public function setMaxErrors($maxErrors)
+    public function setMaxErrors($maxErrors): void
     {
         $this->maxErrors = $maxErrors;
     }

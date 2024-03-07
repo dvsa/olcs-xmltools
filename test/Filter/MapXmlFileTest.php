@@ -12,19 +12,19 @@ use Olcs\XmlTools\Filter\MapXmlFile;
  */
 class MapXmlFileTest extends TestCase
 {
-    public function testFilter()
+    public function testFilter(): void
     {
-        $value = new \DOMDocument();
-        $value->loadXML('<Doc></Doc>');
+        $domDocument = new \DOMDocument();
+        $domDocument->loadXML('<Doc></Doc>');
 
         $mapped = ['other' => 'data'];
 
-        $mockMapper = m::mock('Olcs\XmlTools\Xml\Specification\SpecificationInterface');
+        $mockMapper = m::mock(\Olcs\XmlTools\Xml\Specification\SpecificationInterface::class);
         $mockMapper->shouldReceive('apply')->andReturn($mapped);
 
-        $sut = new MapXmlFile();
-        $sut->setMapping($mockMapper);
+        $mapXmlFile = new MapXmlFile();
+        $mapXmlFile->setMapping($mockMapper);
 
-        $this->assertEquals($mapped, $sut->filter($value));
+        $this->assertEquals($mapped, $mapXmlFile->filter($domDocument));
     }
 }

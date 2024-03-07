@@ -10,7 +10,7 @@ use Olcs\XmlTools\Xml\XmlNodeBuilder;
  */
 class XmlNodeBuilderTest extends \PHPUnit\Framework\TestCase
 {
-    public function testBuildTemplate()
+    public function testBuildTemplate(): void
     {
         $parentElement = 'ParentElement';
         $ns = 'https://webgate.ec.testa.eu/erru/1.0';
@@ -43,7 +43,7 @@ class XmlNodeBuilderTest extends \PHPUnit\Framework\TestCase
             '  </Body>' . "\n" .
             '</' . $parentElement . '>';
 
-        $sut = new XmlNodeBuilder($parentElement, $ns, $input);
-        $this->assertXmlStringEqualsXmlString($expectedReturn, $sut->buildTemplate());
+        $xmlNodeBuilder = new XmlNodeBuilder($parentElement, $ns, $input);
+        $this->assertXmlStringEqualsXmlString($expectedReturn, $xmlNodeBuilder->buildTemplate());
     }
 }

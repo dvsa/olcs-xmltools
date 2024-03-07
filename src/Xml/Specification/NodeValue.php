@@ -17,11 +17,10 @@ class NodeValue extends AbstractCapturingNode
     }
 
     /**
-     * @param \DOMElement $element
      * @return array
      */
-    public function apply(\DOMElement $element)
+    public function apply(\DOMElement $domElement)
     {
-        return $this->createReturnValue($element->nodeValue);
+        return $this->createReturnValue($domElement->nodeValue);
     }
 }

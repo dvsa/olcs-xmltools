@@ -20,9 +20,6 @@ class XmlNodeBuilder extends \DOMDocument
      */
     private $data;
 
-    /**
-     * @var
-     */
     private $xmlNs;
 
     /**
@@ -36,7 +33,7 @@ class XmlNodeBuilder extends \DOMDocument
     /**
      * @param String $rootElement
      */
-    public function setRootElement($rootElement)
+    public function setRootElement($rootElement): void
     {
         $this->rootElement = $rootElement;
     }
@@ -52,7 +49,7 @@ class XmlNodeBuilder extends \DOMDocument
     /**
      * @param Array $data
      */
-    public function setData($data)
+    public function setData($data): void
     {
         $this->data = $data;
     }
@@ -68,7 +65,7 @@ class XmlNodeBuilder extends \DOMDocument
     /**
      * @param String $xmlNs
      */
-    public function setXmlNs($xmlNs)
+    public function setXmlNs($xmlNs): void
     {
         $this->xmlNs = $xmlNs;
     }
@@ -76,7 +73,6 @@ class XmlNodeBuilder extends \DOMDocument
     /**
      * @param $rootElement
      * @param $xmlNs
-     * @param array $data
      */
     public function __construct($rootElement, $xmlNs, array $data)
     {
@@ -93,8 +89,8 @@ class XmlNodeBuilder extends \DOMDocument
      */
     public function buildTemplate()
     {
-        $rootElement = $this->createElementNs($this->getXmlNs(), $this->getRootElement());
-        $document = $this->createFromArray($this->getData(), $rootElement);
+        $domElement = $this->createElementNs($this->getXmlNs(), $this->getRootElement());
+        $document = $this->createFromArray($this->getData(), $domElement);
         $this->appendChild($document);
 
         return $this->saveXML();
@@ -103,13 +99,11 @@ class XmlNodeBuilder extends \DOMDocument
     /**
      * Creates the XML document, requires an array of data and a parent element
      *
-     * @param array $data
-     * @param \DOMElement $domElement
-     * @return \DOMElement
+     * @return \DOMElement|null
      */
-    private function createFromArray(array $data, \DOMElement $domElement = null)
+    private function createFromArray(array $data, \DOMElement $domElement = null): ?\DOMElement
     {
-        foreach ($data as $element => $values) {
+        foreach ($data as $values) {
             //create the element, and give it a value is it has one
             if (isset($values['value'])) {
                 $newElement = $this->createElement($values['name'], $values['value']);

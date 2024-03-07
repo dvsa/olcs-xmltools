@@ -10,13 +10,13 @@ use Olcs\XmlTools\Filter\ParseXmlString;
  */
 class ParseXmlStringTest extends \PHPUnit\Framework\TestCase
 {
-    public function testFilter()
+    public function testFilter(): void
     {
         $xml = '<test></test>';
 
-        $sut = new ParseXmlString();
+        $parseXmlString = new ParseXmlString();
 
-        $dom = $sut->filter($xml);
+        $dom = $parseXmlString->filter($xml);
 
         $this->assertInstanceOf('DOMDocument', $dom);
     }

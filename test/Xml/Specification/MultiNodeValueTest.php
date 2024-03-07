@@ -10,15 +10,15 @@ use Olcs\XmlTools\Xml\Specification\MultiNodeValue;
  */
 class MultiNodeValueTest extends \PHPUnit\Framework\TestCase
 {
-    public function testApply()
+    public function testApply(): void
     {
-        $document = new \DOMDocument();
-        $element = $document->createElement('Test');
+        $domDocument = new \DOMDocument();
+        $element = $domDocument->createElement('Test');
         $element->nodeValue = 'hello';
 
-        $sut = new MultiNodeValue('testprop');
+        $multiNodeValue = new MultiNodeValue('testprop');
 
-        $result = $sut->apply($element);
+        $result = $multiNodeValue->apply($element);
 
         $this->assertEquals(['testprop' => ['hello']], $result);
     }

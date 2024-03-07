@@ -15,7 +15,6 @@ class TagNameFilterIterator extends \FilterIterator
     protected $tags;
 
     /**
-     * @param Iterator $iterator
      * @param array $tags
      */
     public function __construct(Iterator $iterator, $tags = [])
@@ -32,6 +31,8 @@ class TagNameFilterIterator extends \FilterIterator
      */
     public function accept(): bool
     {
-        return isset($this->tags[$this->getInnerIterator()->current()->tagName]);
+        /** @var \DOMElement $domElement */
+        $domElement = $this->getInnerIterator()->current();
+        return isset($this->tags[$domElement->tagName]);
     }
 }

@@ -11,7 +11,7 @@ use org\bovigo\vfs\vfsStream;
  */
 class ParseXmlTest extends \PHPUnit\Framework\TestCase
 {
-    public function testFilter()
+    public function testFilter(): void
     {
         $xml = '<test></test>';
 
@@ -20,9 +20,9 @@ class ParseXmlTest extends \PHPUnit\Framework\TestCase
 
         file_put_contents($xmlFile, $xml);
 
-        $sut = new ParseXml();
+        $parseXml = new ParseXml();
 
-        $dom = $sut->filter($xmlFile);
+        $dom = $parseXml->filter($xmlFile);
 
         $this->assertInstanceOf('DOMDocument', $dom);
     }
