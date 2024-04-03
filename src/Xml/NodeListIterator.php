@@ -30,7 +30,7 @@ class NodeListIterator implements \Iterator
      * @link http://php.net/manual/en/iterator.current.php
      * @return DOMNode|null Can return any type.
      */
-    public function current()
+    public function current(): ?DOMNode
     {
         return $this->target->item($this->key());
     }
@@ -52,7 +52,7 @@ class NodeListIterator implements \Iterator
      * @link http://php.net/manual/en/iterator.key.php
      * @return int|null scalar on success, or null on failure.
      */
-    public function key()
+    public function key(): ?int
     {
         return $this->key;
     }
@@ -64,7 +64,7 @@ class NodeListIterator implements \Iterator
      * @return boolean The return value will be casted to boolean and then evaluated.
      * Returns true on success or false on failure.
      */
-    public function valid()
+    public function valid(): bool
     {
         return $this->target->length > $this->key;
     }
