@@ -10,6 +10,7 @@ use Laminas\Xml\Security;
 /**
  * Class ParseXmlString
  * @package Olcs\XmlTools\Filter
+ * @template-extends AbstractFilter<array>
  */
 class ParseXmlString extends AbstractFilter
 {

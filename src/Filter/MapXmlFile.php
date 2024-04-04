@@ -9,6 +9,7 @@ use Laminas\Filter\Exception;
 /**
  * Class MapXmlFile
  * @package Olcs\XmlTools\Filter
+ * @template-extends AbstractFilter<array>
  */
 class MapXmlFile extends AbstractFilter
 {
