@@ -2,12 +2,12 @@
     "name": "olcs/olcs-xmltools",
     "description": "XML tools for OLCS",
     "require": {
-        "php": "^8.0",
+        "php": "^7.4|^8.0",
         "ext-dom": "*",
         "ext-libxml": "*",
         "laminas/laminas-stdlib": "^3.0",
         "laminas/laminas-servicemanager": "^3.11",
-        "laminas/laminas-filter": "^2.31",
+        "laminas/laminas-filter": "^2.0",
         "laminas/laminas-xml": "^1.2",
         "laminas/laminas-validator": "^2.0",
         "psr/container": "^1.1|^2"
