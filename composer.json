@@ -2,7 +2,7 @@
     "name": "olcs/olcs-xmltools",
     "description": "XML tools for OLCS",
     "require": {
-        "php": "^7.4",
+        "php": "^7.4|^8.0",
         "ext-dom": "*",
         "ext-libxml": "*",
         "laminas/laminas-stdlib": "^3.0",
