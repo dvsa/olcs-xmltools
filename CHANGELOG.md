@@ -1,5 +1,16 @@
 # Changelog
 
+## [7.0.0](https://github.com/dvsa/olcs-xmltools/compare/v6.0.1...v7.0.0) (2024-04-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* Drop php 7.4 support and fixes for 8.x support ([#12](https://github.com/dvsa/olcs-xmltools/issues/12))
+
+### Features
+
+* Drop php 7.4 support and fixes for 8.x support ([#12](https://github.com/dvsa/olcs-xmltools/issues/12)) ([716b5eb](https://github.com/dvsa/olcs-xmltools/commit/716b5eb1ddd253cfb10af115bf666206754b3b66))
+
 ## [6.0.1](https://github.com/dvsa/olcs-xmltools/compare/v6.0.0...v6.0.1) (2024-03-07)
 
 
