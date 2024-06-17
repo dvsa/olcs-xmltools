@@ -6,7 +6,7 @@
         "ext-dom": "*",
         "ext-libxml": "*",
         "laminas/laminas-stdlib": "^3.0",
-        "laminas/laminas-servicemanager": "^3.11",
+        "laminas/laminas-servicemanager": "^4.1",
         "laminas/laminas-filter": "^2.0",
         "laminas/laminas-xml": "^1.2",
         "laminas/laminas-validator": "^2.0",
