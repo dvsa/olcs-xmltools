@@ -41,6 +41,7 @@ class RecursionAttribute implements SpecificationInterface
     /**
      * @return array
      */
+    #[\Override]
     public function apply(\DOMElement $domElement)
     {
         $result = [];

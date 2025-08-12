@@ -31,6 +31,7 @@ class FixedValue extends AbstractCapturingNode
     /**
      * @return mixed
      */
+    #[\Override]
     public function apply(\DOMElement $domElement)
     {
         return $this->createReturnValue($this->getValue());

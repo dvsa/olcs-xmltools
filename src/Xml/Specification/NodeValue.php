@@ -19,6 +19,7 @@ class NodeValue extends AbstractCapturingNode
     /**
      * @return array
      */
+    #[\Override]
     public function apply(\DOMElement $domElement)
     {
         return $this->createReturnValue($domElement->nodeValue);

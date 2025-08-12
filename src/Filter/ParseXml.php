@@ -22,6 +22,7 @@ class ParseXml extends AbstractFilter
      * @throws Exception\RuntimeException If filtering $value is impossible
      * @return mixed
      */
+    #[\Override]
     public function filter($value)
     {
         $domDocument = new DOMDocument();
