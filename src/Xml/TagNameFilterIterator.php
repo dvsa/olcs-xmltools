@@ -29,6 +29,7 @@ class TagNameFilterIterator extends \FilterIterator
      * @link http://php.net/manual/en/filteriterator.accept.php
      * @return bool true if the current element is acceptable, otherwise false.
      */
+    #[\Override]
     public function accept(): bool
     {
         /** @var \DOMElement $domElement */

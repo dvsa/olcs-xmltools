@@ -30,6 +30,7 @@ class MultiRecursionValue extends AbstractCapturingNode
     /**
      * @return array
      */
+    #[\Override]
     public function apply(\DOMElement $domElement)
     {
         return $this->createReturnValue([$this->getRecursion()->apply($domElement)]);

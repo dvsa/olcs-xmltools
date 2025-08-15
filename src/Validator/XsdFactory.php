@@ -11,6 +11,7 @@ use Laminas\ServiceManager\Factory\FactoryInterface;
  */
 class XsdFactory implements FactoryInterface
 {
+    #[\Override]
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null): Xsd
     {
         $config = $container->get('Config');
