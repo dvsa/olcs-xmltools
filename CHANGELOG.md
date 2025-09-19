@@ -1,5 +1,17 @@
 # Changelog
 
+## [8.0.0](https://github.com/dvsa/olcs-xmltools/compare/v7.0.0...v8.0.0) (2025-09-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* update workflow and composer files to min PHP 8.2/8.3, bump minimum dep versions, fix static analysis VOL-6497 ([#17](https://github.com/dvsa/olcs-xmltools/issues/17))
+
+### Miscellaneous Chores
+
+* bump phpstan and psalm, static analysis now runs on PHP 8.3 ([#19](https://github.com/dvsa/olcs-xmltools/issues/19)) ([1d36ed2](https://github.com/dvsa/olcs-xmltools/commit/1d36ed2b200acbe2fee491b234d37d03ec5d5a26))
+* update workflow and composer files to min PHP 8.2/8.3, bump minimum dep versions, fix static analysis VOL-6497 ([#17](https://github.com/dvsa/olcs-xmltools/issues/17)) ([e24b05b](https://github.com/dvsa/olcs-xmltools/commit/e24b05b506cce8e148b39aa6d60fb74bc3e78799))
+
 ## [7.0.0](https://github.com/dvsa/olcs-xmltools/compare/v6.0.1...v7.0.0) (2024-04-05)
 
 
