@@ -46,22 +46,37 @@ class Recursion implements SpecificationInterface
     {
         $result = [];
         $specification = $this->getSpecification();
-        $nodeList = $domElement->childNodes;
 
+        // Apply inline specs (numeric keys) to the *current* element
+        foreach ($specification as $key => $instruction) {
+            if (!is_int($key)) {
+                continue;
+            }
+            // $instruction can be a single spec or an array of specs
+            $instructions = is_array($instruction) ? $instruction : [$instruction];
+            foreach ($instructions as $inst) {
+                /** @var SpecificationInterface $inst */
+                $result = ArrayUtils::merge($result, $inst->apply($domElement));
+            }
+        }
+
+        // Recurse into children for string-keyed specs (existing behaviour)
+        // Build the list of tag names to look for (string keys only)
+        $tagNames = array_filter(array_keys($specification), 'is_string');
+
+        $nodeList = $domElement->childNodes;
         $iterator = new NodeListIterator($nodeList);
         $iterator = new ElementIterator($iterator);
         $iterator = new TagNameFilterIterator($iterator, array_keys($specification));
 
         /** @var \DOMElement $element */
         foreach ($iterator as $element) {
-            $spec = $specification[$element->tagName];
-            if (!is_array($spec)) {
-                $spec = [$spec];
-            }
+            $childSpec = $specification[$element->tagName];
+            $childSpecs = is_array($childSpec) ? $childSpec : [$childSpec];
 
-            foreach ($spec as $instruction) {
+            foreach ($childSpecs as $instruction) {
                 /** @var SpecificationInterface $instruction */
-                $result = ArrayUtils::merge($result, $instruction->apply($element));
+                $result = \Laminas\Stdlib\ArrayUtils::merge($result, $instruction->apply($element));
             }
         }
 
